@@ -83,7 +83,7 @@ class ViewController: UIViewController {
             .from().isAlignDirectionEnd(true)
             .defaultAlignment(KittenAlignment.center)
             .add(imageView).size(60, KittenSign.equal).priority(KittenPriority.high)
-            .add(textView).itemOffset(40).fillParent().align(.end)
+            .add(textView).itemOffset(40).fillParent().align(.center)
             .build();
     }
     
@@ -122,8 +122,8 @@ class ViewController: UIViewController {
         
         return Kitten.create(.horizontal).from()
             .weightMode(true).itemDefaultOffset(10).startPadding(20).endPadding(20)
-            .add(viewA).weight(5)
-            .add(viewB).weight(5)
+            .add(viewA).weight(2)
+            .add(viewB).weight(2)
             .add(viewC).weight(1)
             .build()
     }
