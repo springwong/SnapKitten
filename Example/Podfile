@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SnapKitten_Example' do
+  pod 'SnapKitten', :path => '../'
+
+  target 'SnapKitten_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase'
+  end
+end
