@@ -266,109 +266,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
             })
         }
     }
-    private func verticalBuild(){
-        let insertItems = preBuild()
-        var previousChild : UIView?
-        let totalWeight : Float? = childs.first?.weight
-        insertItems.forEach { (child) in
-            parent?.addSubview(child.view)
-            updateCompressionResistance(.vertical, child)
-            child.view.snp.makeConstraints({ (make) in
-                updateAlignment(make.left, make.right, make.centerX, child)
-                if isWeightMode{
-                    if insertItems.first?.view == child.view{
-                        make.top.equalToSuperview().offset(startPadding)
-                    }else{
-                        make.top.equalTo((previousChild?.snp.right)!).offset(child.itemOffset)
-                        make.bottom.lessThanOrEqualToSuperview().offset(endPadding)
-                        make.height.equalTo((insertItems.first?.view)!).multipliedBy(child.weight / totalWeight!)
-                    }
-                    if (insertItems.last?.view == (child.view)){
-                        make.bottom.equalTo(parentBottom!).offset(-endPadding)
-                    }else{
-                        make.top.greaterThanOrEqualToSuperview().offset(startPadding)
-                    }
-                }else{
-                    if (insertItems.first?.view == (child.view)) {
-                        make.top.equalTo(parentTop!).offset(startPadding)
-                    }else{
-                        make.top.equalTo((previousChild?.snp.bottom)!).offset(child.itemOffset)
-                    }
-                    if (insertItems.last?.view == (child.view)){
-                        if isAlignParentEnd{
-                            make.bottom.equalTo(parentBottom!).offset(-endPadding)
-                        }else{
-                            make.bottom.lessThanOrEqualTo(parentBottom!).offset(-endPadding)
-                        }
-                    }
-                    updateSize(make.height, child.height)
-                }
-                updateSize(make.width, child.width)
-                if child.isFillParent{
-                    make.width.equalToSuperview().priority(1)
-                    make.width.lessThanOrEqualToSuperview()
-                }
-                
-                if let ratio = child.ratio{
-                    make.height.lessThanOrEqualTo((parent?.snp.width)!).multipliedBy(ratio)
-                }
-                previousChild = child.view
-            })
-        }
-    }
-    private func horizontalBuild(){
-        let insertItems = preBuild()
-        var previousChild : UIView?
-        let totalWeight : Float? = childs.first?.weight
-        insertItems.forEach {
-            (child) in
-            parent?.addSubview(child.view)
-            updateCompressionResistance(.horizontal, child)
-            
-            child.view.snp.makeConstraints({ (make) in
-                updateAlignment(make.top, make.bottom, make.centerY, child)
-                
-                if isWeightMode{
-                    if insertItems.first?.view == child.view{
-                        make.left.equalToSuperview().offset(startPadding)
-                    }else{
-                        make.left.equalTo((previousChild?.snp.right)!).offset(child.itemOffset)
-                        make.right.lessThanOrEqualToSuperview().offset(endPadding)
-                       make.width.equalTo((insertItems.first?.view)!).multipliedBy(child.weight / totalWeight!)
-                    }
-                    if (insertItems.last?.view == (child.view)){
-                        make.right.equalTo(parentRight!).offset(-endPadding)
-                    }else{
-                        make.left.greaterThanOrEqualToSuperview().offset(startPadding)
-                    }
-                }else{
-                    if (insertItems.first?.view == (child.view)) {
-                        make.left.equalTo(parentLeft!).offset(startPadding)
-                    }else{
-                        make.left.equalTo((previousChild?.snp.right)!).offset(child.itemOffset)
-                    }
-                    if (insertItems.last?.view == (child.view)){
-                        if isAlignParentEnd{
-                            make.right.equalTo(parentRight!).offset(-endPadding)
-                        }else{
-                            make.right.lessThanOrEqualTo(parentRight!).offset(-endPadding)
-                        }
-                    }
-                    updateSize(make.height, child.height)
-                }
-                
-                updateSize(make.width, child.width)
-                if child.isFillParent{
-                    make.width.equalToSuperview().priority(1)
-                    make.width.lessThanOrEqualToSuperview()
-                }
-                if let ratio = child.ratio{
-                    make.width.lessThanOrEqualTo((parent?.snp.height)!).multipliedBy(ratio)
-                }
-                previousChild = child.view
-            })
-        }
-    }
     private func updateCompressionResistance(_ axis : UILayoutConstraintAxis, _ child : KittenItem){
         switch child.priority {
         case .low:
@@ -382,26 +279,15 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     private func updateAlignment(_ start : ConstraintMakerExtendable, _ end : ConstraintMakerExtendable, _ center : ConstraintMakerExtendable, _ child : KittenItem){
         switch child.alignment{
         case .start:
-            //todo: check later why set like this before
-//            start.equalToSuperview().offset(child.sideStartPadding)
-//            end.lessThanOrEqualToSuperview().offset(-child.sideEndPadding)
-//            end.equalToSuperview().offset(-child.sideEndPadding).priority(minimumPriority)
             start.equalToSuperview().offset(child.sideStartPadding)
             end.lessThanOrEqualToSuperview().offset(-child.sideEndPadding)
         case .end:
-//            start.greaterThanOrEqualToSuperview().offset(child.sideStartPadding)
-//            start.equalToSuperview().offset(child.sideStartPadding).priority(minimumPriority)
-//            end.equalToSuperview().offset(-child.sideEndPadding)
             start.greaterThanOrEqualToSuperview().offset(child.sideStartPadding)
             end.equalToSuperview().offset(-child.sideEndPadding)
         case .center:
             center.equalToSuperview()
             start.greaterThanOrEqualToSuperview().offset(child.sideStartPadding)
             end.lessThanOrEqualToSuperview().offset(-child.sideEndPadding)
-//            start.greaterThanOrEqualToSuperview().offset(child.sideStartPadding)
-//            start.equalToSuperview().offset(child.sideStartPadding).priority(minimumPriority)
-//            end.lessThanOrEqualToSuperview().offset(-child.sideEndPadding)
-//            end.equalToSuperview().offset(-child.sideEndPadding).priority(minimumPriority)
         case .parent:
             start.equalToSuperview().offset(child.sideStartPadding)
             end.equalToSuperview().offset(-child.sideEndPadding)
