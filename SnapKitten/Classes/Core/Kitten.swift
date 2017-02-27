@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-public class Kitten : SnapKittenParent, SnapKittenParentMethods, SnapKittenChildMethods, SnapKittenBuild{
+public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, KittenBuild{
     internal var parent : UIView?
     internal var parentTop : ConstraintItem?
     internal var parentBottom : ConstraintItem?
@@ -35,10 +35,10 @@ public class Kitten : SnapKittenParent, SnapKittenParentMethods, SnapKittenChild
     private init(_ orientation : KittenOrientation){
         self.orientation = orientation
     }
-    static public func create(_ orientation : KittenOrientation) -> SnapKittenParent{
+    static public func create(_ orientation : KittenOrientation) -> KittenParent{
         return Kitten(orientation)
     }
-    public func from(_ parent : UIView) -> SnapKittenParentMethods{
+    public func from(_ parent : UIView) -> KittenParentMethods{
         self.parent = parent
         self.parentTop = parent.snp.top
         self.parentBottom = parent.snp.bottom
@@ -46,7 +46,7 @@ public class Kitten : SnapKittenParent, SnapKittenParentMethods, SnapKittenChild
         self.parentRight = parent.snp.right
         return self
     }
-    public func from() -> SnapKittenParentMethods{
+    public func from() -> KittenParentMethods{
         self.parent = UIView()
         if let parent = self.parent{
             self.parentTop = parent.snp.top
@@ -56,60 +56,60 @@ public class Kitten : SnapKittenParent, SnapKittenParentMethods, SnapKittenChild
         }
         return self
     }
-    public func parentTop(_ top : ConstraintItem) -> SnapKittenParentMethods{
+    public func parentTop(_ top : ConstraintItem) -> KittenParentMethods{
         self.parentTop = top
         return self
     }
-    public func parentLeft(_ left : ConstraintItem) -> SnapKittenParentMethods{
+    public func parentLeft(_ left : ConstraintItem) -> KittenParentMethods{
         self.parentLeft = left
         return self
     }
-    public func parentBottom(_ bottom : ConstraintItem) -> SnapKittenParentMethods{
+    public func parentBottom(_ bottom : ConstraintItem) -> KittenParentMethods{
         self.parentBottom = bottom
         return self
     }
-    public func parentRight(_ right : ConstraintItem) -> SnapKittenParentMethods{
+    public func parentRight(_ right : ConstraintItem) -> KittenParentMethods{
         self.parentRight = right
         return self
     }
-    public func defaultAlignment(_ alignment : KittenAlignment) -> SnapKittenParentMethods{
+    public func defaultAlignment(_ alignment : KittenAlignment) -> KittenParentMethods{
         self.defaultAlignment = alignment
         return self
     }
-    public func startPadding(_ value : Int) -> SnapKittenParentMethods{
+    public func startPadding(_ value : Int) -> KittenParentMethods{
         self.startPadding = value
         return self
     }
-    public func endPadding(_ value : Int) -> SnapKittenParentMethods{
+    public func endPadding(_ value : Int) -> KittenParentMethods{
         self.endPadding = value
         return self
     }
-    public func itemDefaultOffset(_ value : Int)->SnapKittenParentMethods{
+    public func itemDefaultOffset(_ value : Int)->KittenParentMethods{
         self.defaultItemOffset = value
         return self
     }
-    public func itemDefaultSideStartPadding(_ value : Int)->SnapKittenParentMethods{
+    public func itemDefaultSideStartPadding(_ value : Int)->KittenParentMethods{
         self.defaultItemSideStartPadding = value
         return self
     }
-    public func itemDefaultSideEndPadding(_ value : Int)->SnapKittenParentMethods{
+    public func itemDefaultSideEndPadding(_ value : Int)->KittenParentMethods{
         self.defaultItemSideEndPadding = value
         return self
     }
-    public func isAlignDirectionEnd(_ isAlign : Bool) -> SnapKittenParentMethods{
+    public func isAlignDirectionEnd(_ isAlign : Bool) -> KittenParentMethods{
         self.isAlignParentEnd = isAlign
         return self
     }
-    public func orientation(_ orientation : KittenOrientation) -> SnapKittenParentMethods{
+    public func orientation(_ orientation : KittenOrientation) -> KittenParentMethods{
         self.orientation = orientation
         return self
     }
-    public func weightMode(_ isOn : Bool) -> SnapKittenParentMethods{
+    public func weightMode(_ isOn : Bool) -> KittenParentMethods{
         self.isWeightMode = isOn
         return self
     }
     
-    public func add(_ child : UIView) -> SnapKittenChildMethods{
+    public func add(_ child : UIView) -> KittenChildMethods{
         let item = KittenItem(child: child, alignment : defaultAlignment)
         item.sideStartPadding = defaultItemSideStartPadding
         item.sideEndPadding = defaultItemSideEndPadding
@@ -118,7 +118,7 @@ public class Kitten : SnapKittenParent, SnapKittenParentMethods, SnapKittenChild
         self.currentChild = item
         return self
     }
-    public func with(_ child: UIView) -> SnapKittenChildMethods {
+    public func with(_ child: UIView) -> KittenChildMethods {
         for item in childs{
             if child.isEqual(item.view){
                 self.currentChild = item
@@ -128,52 +128,52 @@ public class Kitten : SnapKittenParent, SnapKittenParentMethods, SnapKittenChild
         debugPrint("SnapKitten Object with(child) : \(child.description) is not exist, current editing target remains")
         return self
     }
-    public func fillParent() -> SnapKittenChildMethods{
+    public func fillParent() -> KittenChildMethods{
         currentChild?.isFillParent = true
         return self
     }
-    public func itemOffset(_ value : Int) -> SnapKittenChildMethods{
+    public func itemOffset(_ value : Int) -> KittenChildMethods{
         self.currentChild?.itemOffset = value
         return self
     }
-    public func sideStartPadding(_ value : Int) -> SnapKittenChildMethods{
+    public func sideStartPadding(_ value : Int) -> KittenChildMethods{
         self.currentChild?.sideStartPadding = value
         return self
     }
-    public func sideEndPadding(_ value : Int) -> SnapKittenChildMethods{
+    public func sideEndPadding(_ value : Int) -> KittenChildMethods{
         self.currentChild?.sideEndPadding = value
         return self
     }
-    public func ratio(_ ratio : Float) -> SnapKittenChildMethods{
+    public func ratio(_ ratio : Float) -> KittenChildMethods{
         self.currentChild?.ratio = ratio
         return self
     }
-    public func align(_ alignment : KittenAlignment) -> SnapKittenChildMethods{
+    public func align(_ alignment : KittenAlignment) -> KittenChildMethods{
         self.currentChild?.alignment = alignment
         return self
     }
-    public func condition(_ condition : @escaping KittenInsertCondition) -> SnapKittenChildMethods{
+    public func condition(_ condition : @escaping KittenInsertCondition) -> KittenChildMethods{
         self.currentChild?.insertCondition = condition
         return self
     }
-    public func width(_ value : Int?, _ condition : KittenSign = .equal) -> SnapKittenChildMethods{
+    public func width(_ value : Int?, _ condition : KittenSign = .equal) -> KittenChildMethods{
         self.currentChild?.width = KittenDimension(value: value, condition: condition)
         return self
     }
-    public func height(_ value : Int?, _ condition : KittenSign = .equal) -> SnapKittenChildMethods{
+    public func height(_ value : Int?, _ condition : KittenSign = .equal) -> KittenChildMethods{
         self.currentChild?.height = KittenDimension(value: value, condition: condition)
         return self
     }
-    public func size(_ value: Int?, _ condition : KittenSign = .equal) -> SnapKittenChildMethods {
+    public func size(_ value: Int?, _ condition : KittenSign = .equal) -> KittenChildMethods {
         self.currentChild?.width = KittenDimension(value: value, condition: condition)
         self.currentChild?.height = KittenDimension(value: value, condition: condition)
         return self
     }
-    public func priority(_ priority : KittenPriority) -> SnapKittenChildMethods{
+    public func priority(_ priority : KittenPriority) -> KittenChildMethods{
         self.currentChild?.priority = priority
         return self
     }
-    public func weight(_ value : Float) -> SnapKittenChildMethods{
+    public func weight(_ value : Float) -> KittenChildMethods{
         self.currentChild?.weight = value
         return self
     }
