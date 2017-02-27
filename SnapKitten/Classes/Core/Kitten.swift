@@ -189,12 +189,12 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         })
     }
     public func build() -> UIView{
-        if orientation == .vertical{
-            verticalBuild()
-        }
-        if orientation == .horizontal{
-            horizontalBuild()
-        }
+        mixBuild()
+//        if orientation == .vertical{
+//            verticalBuild()
+//        }else{
+//            horizontalBuild()
+//        }
         return parent!
     }
     
@@ -205,7 +205,67 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         }
         return build()
     }
-    
+    private func mixBuild(){
+        let insertItems = preBuild()
+        var previousChild : UIView?
+        let totalWeight : Float? = childs.first?.weight
+        insertItems.forEach { (child) in
+            parent?.addSubview(child.view)
+            child.view.snp.makeConstraints({ (make) in
+                let start = orientation == .vertical ? make.top : make.left
+                let end = orientation == .vertical ? make.bottom : make.right
+                let lastEnd = orientation == .vertical ? previousChild?.snp.bottom : previousChild?.snp.right
+                let parentEnd = orientation == .vertical ? parentBottom : parentRight
+                let parentStart = orientation == .vertical ? parentTop : parentLeft
+                let orientationLength = orientation == .vertical ? make.height : make.width
+                let perpendicularLength = orientation == .vertical ? make.width : make.height
+                let orientationChildSize = orientation == .vertical ? child.height : child.width
+                let perpendicularChildSize = orientation == .vertical ? child.width : child.height
+                updateCompressionResistance(orientation == .vertical ? .vertical : .horizontal, child)
+                updateAlignment(
+                    orientation == .vertical ? make.left : make.top
+                    , orientation == .vertical ? make.right : make.bottom
+                    , orientation == .vertical ? make.centerX : make.centerY
+                    , child)
+                if isWeightMode{
+                    if insertItems.first?.view == child.view{
+                        start.equalToSuperview().offset(startPadding)
+                    }else{
+                        start.equalTo(lastEnd!).offset(child.itemOffset)
+                        orientationLength.equalTo((insertItems.first?.view)!).multipliedBy(child.weight / totalWeight!)
+                    }
+                    if (insertItems.last?.view == (child.view)){
+                        end.equalTo(parentEnd!).offset(-endPadding)
+                    }
+                }else{
+                    if (insertItems.first?.view == (child.view)) {
+                        start.equalTo(parentStart!).offset(startPadding)
+                    }else{
+                        start.equalTo(lastEnd!).offset(child.itemOffset)
+                    }
+                    if (insertItems.last?.view == (child.view)){
+                        if isAlignParentEnd{
+                            end.equalTo(parentEnd!).offset(-endPadding)
+                        }else{
+                            end.lessThanOrEqualTo(parentEnd!).offset(-endPadding)
+                        }
+                    }
+                    updateSize(orientationLength, orientationChildSize)
+                }
+                updateSize(perpendicularLength, perpendicularChildSize)
+                if child.isFillParent{
+                    orientationLength.equalToSuperview().priority(1)
+                    orientationLength.lessThanOrEqualToSuperview()
+                }
+                
+                //todo : rethink if this feature appropriate
+//                if let ratio = child.ratio{
+//                    make.height.lessThanOrEqualTo((parent?.snp.width)!).multipliedBy(ratio)
+//                }
+                previousChild = child.view
+            })
+        }
+    }
     private func verticalBuild(){
         let insertItems = preBuild()
         var previousChild : UIView?
@@ -224,9 +284,9 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                         make.height.equalTo((insertItems.first?.view)!).multipliedBy(child.weight / totalWeight!)
                     }
                     if (insertItems.last?.view == (child.view)){
-                        make.right.equalTo(parentRight!).offset(-endPadding)
+                        make.bottom.equalTo(parentBottom!).offset(-endPadding)
                     }else{
-                        make.left.greaterThanOrEqualToSuperview().offset(startPadding)
+                        make.top.greaterThanOrEqualToSuperview().offset(startPadding)
                     }
                 }else{
                     if (insertItems.first?.view == (child.view)) {
@@ -294,7 +354,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                             make.right.lessThanOrEqualTo(parentRight!).offset(-endPadding)
                         }
                     }
-                    updateSize(make.height, child.width)
+                    updateSize(make.height, child.height)
                 }
                 
                 updateSize(make.width, child.width)
