@@ -31,7 +31,7 @@
 		0611609DB1A4A869E7919A26 /* Pods_SnapKitten_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapKitten_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF0A2FFCFC8540963819068 /* Pods-SnapKitten_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapKitten_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnapKitten_Tests/Pods-SnapKitten_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		3210F79786392106D2AA6BEC /* Pods-SnapKitten_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapKitten_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnapKitten_Example/Pods-SnapKitten_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		4E86F20B3E7294022504C245 /* SnapKitten.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = SnapKitten.podspec; path = ../SnapKitten.podspec; sourceTree = "<group>"; };
+		4E86F20B3E7294022504C245 /* SnapKitten.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SnapKitten.podspec; path = ../SnapKitten.podspec; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* SnapKitten_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapKitten_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,8 +42,8 @@
 		607FACE51AFB9204008FA782 /* SnapKitten_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapKitten_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		7320976602F8977619BC6BF6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		923BA3610E1E26E551D056B4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		7320976602F8977619BC6BF6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		923BA3610E1E26E551D056B4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		A2839F8E3E3EEB91C14BED91 /* Pods_SnapKitten_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapKitten_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8BBC4D1A670B5590ED10F30 /* Pods-SnapKitten_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapKitten_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnapKitten_Tests/Pods-SnapKitten_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		FD645CBC14236D45DACBDAA7 /* Pods-SnapKitten_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapKitten_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnapKitten_Example/Pods-SnapKitten_Example.release.xcconfig"; sourceTree = "<group>"; };
