@@ -20,7 +20,7 @@ public protocol KittenParentMethods : KittenChild, KittenBuild{
     //is items match_parent
     func isAlignDirectionEnd(_ isAlign : Bool) -> KittenParentMethods
     //the layout direct
-    func orientation(_ orientation : KittenOrientation) -> KittenParentMethods
+//    func orientation(_ orientation : KittenOrientation) -> KittenParentMethods
     //swift only methods for ViewController
     func parentTop(_ top : ConstraintItem) -> KittenParentMethods
     func parentLeft(_ left : ConstraintItem) -> KittenParentMethods

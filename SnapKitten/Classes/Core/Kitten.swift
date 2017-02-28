@@ -46,6 +46,11 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.parentRight = parent.view.snp.right
         return self
     }
+    public func from(_ parent : UIScrollView) -> KittenParentMethods{
+        self.parent = UIView()
+        parent.attachContentView(contentView : self.parent!, scrollOrientation : self.orientation)
+        return self
+    }
     public func from(_ parent : UIView) -> KittenParentMethods{
         self.parent = parent
         self.parentTop = parent.snp.top
@@ -108,10 +113,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.isAlignParentEnd = isAlign
         return self
     }
-    public func orientation(_ orientation : KittenOrientation) -> KittenParentMethods{
-        self.orientation = orientation
-        return self
-    }
+
     public func weightMode(_ isOn : Bool) -> KittenParentMethods{
         self.isWeightMode = isOn
         return self

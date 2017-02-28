@@ -13,4 +13,5 @@ public protocol KittenParent : KittenBuild{
     func from(_ parent : UIView) -> KittenParentMethods
     func from() -> KittenParentMethods
     func from(_ parent : UIViewController) -> KittenParentMethods
+    func from(_ parent : UIScrollView) -> KittenParentMethods
 }

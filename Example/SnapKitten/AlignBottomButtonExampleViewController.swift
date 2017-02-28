@@ -14,6 +14,9 @@ class AlignBottomButtonExampleViewController: UIViewController {
     lazy var sv = UIButton()
     lazy var btn = UIButton()
     
+    lazy var lbl = UILabel()
+    lazy var btnB = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +31,13 @@ class AlignBottomButtonExampleViewController: UIViewController {
             .add(sv).fillParent()
             .add(btn)
             .build()
-
+        
+        lbl.text = "ei fji jewiojweo jowe"
+        btnB.setTitle("End Button", for: .normal)
+        _ = Kitten.create(.vertical).from(sv)
+        .add(lbl).align(.center)
+            .add(btnB).align(.end).itemOffset(20).sideEndPadding(50)
+        .build()
     }
     
     override func viewDidAppear(_ animated: Bool) {
