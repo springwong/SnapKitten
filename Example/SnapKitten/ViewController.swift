@@ -19,9 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-        _ = Kitten.create(.vertical).from(self.view)
-            .parentTop(self.topLayoutGuide.snp.bottom)
-            .parentBottom(self.bottomLayoutGuide.snp.top)
+        _ = Kitten.create(.vertical).from(self)
             .isAlignDirectionEnd(true)
             .add(sv).build()
         
@@ -36,6 +34,13 @@ class ViewController: UIViewController {
             .build();
         
         sv.attachContentView(contentView: mainView, scrollOrientation: .vertical)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
+        self.present(nv, animated: true, completion: nil)
     }
     
     func updateUI(){
@@ -129,9 +134,8 @@ class ViewController: UIViewController {
             .build()
     }
     func btnOnClick(){
-        print(viewA.frame.size)
-        print(viewB.frame.size)
-        print(viewC.frame.size)
+        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
+        self.present(nv, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

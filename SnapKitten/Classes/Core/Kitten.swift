@@ -38,6 +38,14 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     static public func create(_ orientation : KittenOrientation) -> KittenParent{
         return Kitten(orientation)
     }
+    public func from(_ parent : UIViewController) -> KittenParentMethods{
+        self.parent = parent.view
+        self.parentTop = parent.topLayoutGuide == nil ? parent.view.snp.top : parent.topLayoutGuide.snp.bottom
+        self.parentBottom = parent.bottomLayoutGuide == nil ? parent.view.snp.bottom : parent.bottomLayoutGuide.snp.top
+        self.parentLeft = parent.view.snp.left
+        self.parentRight = parent.view.snp.right
+        return self
+    }
     public func from(_ parent : UIView) -> KittenParentMethods{
         self.parent = parent
         self.parentTop = parent.snp.top

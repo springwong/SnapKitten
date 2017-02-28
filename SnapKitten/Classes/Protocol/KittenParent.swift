@@ -12,5 +12,5 @@ public protocol KittenParent : KittenBuild{
     //prepare the parent which will added our item to
     func from(_ parent : UIView) -> KittenParentMethods
     func from() -> KittenParentMethods
-    
+    func from(_ parent : UIViewController) -> KittenParentMethods
 }
