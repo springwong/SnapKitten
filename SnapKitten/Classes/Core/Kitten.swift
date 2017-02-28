@@ -49,6 +49,10 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     public func from(_ parent : UIScrollView) -> KittenParentMethods{
         self.parent = UIView()
         parent.attachContentView(contentView : self.parent!, scrollOrientation : self.orientation)
+        self.parentTop = self.parent?.snp.top
+        self.parentBottom = self.parent?.snp.bottom
+        self.parentLeft = self.parent?.snp.left
+        self.parentRight = self.parent?.snp.right
         return self
     }
     public func from(_ parent : UIView) -> KittenParentMethods{

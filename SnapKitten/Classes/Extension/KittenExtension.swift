@@ -14,11 +14,13 @@ public extension UIScrollView{
         contentView.snp.makeConstraints { (make) in
             switch scrollOrientation{
             case .vertical:
-                make.width.lessThanOrEqualToSuperview()
+//                make.width.lessThanOrEqualToSuperview()
+                make.width.equalToSuperview()
                 make.left.right.equalToSuperview()
                 make.top.bottom.equalToSuperview()
             case .horizontal:
-                make.height.lessThanOrEqualToSuperview()
+//                make.height.lessThanOrEqualToSuperview()
+                make.height.equalToSuperview()
                 make.top.bottom.equalToSuperview()
                 make.left.right.equalToSuperview()
             }

@@ -15,7 +15,7 @@ internal final class KittenItem {
     var sideStartPadding : Int = 0
     var sideEndPadding : Int = 0
     
-    var priority : KittenPriority = .medium
+    var priority : KittenPriority = .high
     var weight : Float = 1
     
     var ratio : Float?
