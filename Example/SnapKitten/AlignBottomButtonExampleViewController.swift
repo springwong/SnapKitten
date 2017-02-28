@@ -25,32 +25,15 @@ class AlignBottomButtonExampleViewController: UIViewController {
         btn.addTarget(self, action: #selector(btnOnClick), for: .touchUpInside)
         _ = Kitten.create(.vertical).from(self)
             .isAlignDirectionEnd(true).defaultAlignment(.parent)
-            //        .add(sv).fillParent()
-            .add(btn)//.fillParent()
-            //            .priority(.high)
+            .add(sv).fillParent()
+            .add(btn)
             .build()
-        
-        
-        // Do any additional setup after loading the view.
-//        self.view.addSubview(btn)
-//        btn.snp.makeConstraints { (make) in
-////            make.left.top.right.bottom.equalToSuperview()
-//            make.left.equalTo(self.view.snp.left)
-//            make.right.equalTo(self.view.snp.right)
-//            make.top.equalTo(self.view.snp.top)
-//            make.bottom.equalTo(self.view.snp.bottom)
-//        }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        _ = Kitten.create(.vertical).from(self)
-//            .isAlignDirectionEnd(true).defaultAlignment(.parent)
-//            //        .add(sv).fillParent()
-//            .add(btn)//.fillParent()
-//            //            .priority(.high)
-//            .build()
     }
 
     override func didReceiveMemoryWarning() {

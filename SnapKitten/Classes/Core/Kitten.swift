@@ -186,7 +186,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return self
     }
     internal func preBuild() -> [KittenItem]{
-        parent?.translatesAutoresizingMaskIntoConstraints = false
+//        parent?.translatesAutoresizingMaskIntoConstraints = false
         return childs.filter({ (item) -> Bool in
             if let condition = item.insertCondition{
                 if !condition(){

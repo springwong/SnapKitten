@@ -38,9 +38,6 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
-        self.present(nv, animated: true, completion: nil)
     }
     
     func updateUI(){
