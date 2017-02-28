@@ -24,10 +24,6 @@ class AlignBottomButtonExampleViewController: UIViewController {
         btn.backgroundColor = UIColor.green
         btn.setTitle("Test Button", for: .normal)
         
-        _ = Kitten.create(.vertical).from(sv)
-            .add(lbl).align(.center)
-            .add(btnB).align(.end).itemOffset(20).sideEndPadding(50)
-            .build()
         self.view.backgroundColor = UIColor.blue
         btn.addTarget(self, action: #selector(btnOnClick), for: .touchUpInside)
         _ = Kitten.create(.vertical).from(self)
@@ -36,8 +32,14 @@ class AlignBottomButtonExampleViewController: UIViewController {
             .add(btn)
             .build()
         
+        _ = Kitten.create(.vertical).from(sv)
+            .add(lbl).align(.center)
+            .add(btnB).align(.end).itemOffset(20).sideEndPadding(50)
+            .build()
+        
         lbl.text = "ei fji jewiojweo jowe"
         btnB.setTitle("End Button", for: .normal)
+        btnB.backgroundColor = UIColor.black
     }
     
     override func viewDidAppear(_ animated: Bool) {
