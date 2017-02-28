@@ -11,7 +11,7 @@ import SnapKitten
 
 class AlignBottomButtonExampleViewController: UIViewController {
 
-    lazy var sv = UIButton()
+    lazy var sv = UIScrollView()
     lazy var btn = UIButton()
     
     lazy var lbl = UILabel()
