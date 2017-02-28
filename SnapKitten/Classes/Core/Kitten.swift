@@ -190,11 +190,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     }
     public func build() -> UIView{
         mixBuild()
-//        if orientation == .vertical{
-//            verticalBuild()
-//        }else{
-//            horizontalBuild()
-//        }
         return parent!
     }
     
