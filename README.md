@@ -1,5 +1,7 @@
 # SnapKitten
 
+SnapKitten is a Linear Layout Solution Library based on SnapKit and Auto Layout.
+
 [![CI Status](http://img.shields.io/travis/Spring Wong/SnapKitten.svg?style=flat)](https://travis-ci.org/Spring Wong/SnapKitten)
 [![Version](https://img.shields.io/cocoapods/v/SnapKitten.svg?style=flat)](http://cocoapods.org/pods/SnapKitten)
 [![License](https://img.shields.io/cocoapods/l/SnapKitten.svg?style=flat)](http://cocoapods.org/pods/SnapKitten)
@@ -9,7 +11,27 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+#Usage
+
+```ruby
+import SnapKitten
+
+class ViewController: UIViewController {
+    lazy var textViewA = UILabel()
+    lazy var textViewB = UILabel()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //Some visual update on textView
+        updateUI()
+        _ = Kitten.create(.vertical).from(self)
+            .add(textViewA)
+            .add(textViewB)
+            .build()
+    }
+```
+
 ## Requirements
+- iOS 8.0+
 
 ## Installation
 
