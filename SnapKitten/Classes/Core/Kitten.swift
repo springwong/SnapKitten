@@ -30,8 +30,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     internal var defaultItemSideStartPadding : Int = 0
     internal var defaultItemSideEndPadding : Int = 0
     
-    internal var minimumPriority = 1
-    
     private init(_ orientation : KittenOrientation){
         self.orientation = orientation
     }
@@ -171,10 +169,11 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.currentChild?.sideEndPadding = value
         return self
     }
-    public func ratio(_ ratio : Float) -> KittenChildMethods{
-        self.currentChild?.ratio = ratio
-        return self
-    }
+    //not implement currently
+//    public func ratio(_ ratio : Float) -> KittenChildMethods{
+//        self.currentChild?.ratio = ratio
+//        return self
+//    }
     public func align(_ alignment : KittenAlignment) -> KittenChildMethods{
         self.currentChild?.alignment = alignment
         return self

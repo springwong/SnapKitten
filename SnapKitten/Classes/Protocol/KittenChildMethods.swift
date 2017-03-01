@@ -14,7 +14,7 @@ public protocol KittenChildMethods : KittenChild, KittenBuild{
     func sideEndPadding(_ value : Int) -> KittenChildMethods
     //a ratio under current orientation
     //todo : have to separate later
-    func ratio(_ ratio : Float) -> KittenChildMethods
+//    func ratio(_ ratio : Float) -> KittenChildMethods
     //set width of item, equalTo
     func width(_ value : Int?, _ condition : KittenSign) -> KittenChildMethods
     //set height of item, equalTo
