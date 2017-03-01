@@ -113,6 +113,13 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.defaultItemSideEndPadding = value
         return self
     }
+    public func allPadding(_ value : Int)->KittenParentMethods{
+        self.defaultItemSideEndPadding = value
+        self.defaultItemSideStartPadding = value
+        self.startPadding = value
+        self.endPadding = value
+        return self
+    }
     public func isAlignDirectionEnd(_ isAlign : Bool) -> KittenParentMethods{
         self.isAlignParentEnd = isAlign
         return self

@@ -17,6 +17,7 @@ public protocol KittenParentMethods : KittenChild, KittenBuild{
     func itemDefaultOffset(_ value : Int)->KittenParentMethods
     func itemDefaultSideStartPadding(_ value : Int)->KittenParentMethods
     func itemDefaultSideEndPadding(_ value : Int)->KittenParentMethods
+    func allPadding(_ value : Int)->KittenParentMethods
     //is items match_parent
     func isAlignDirectionEnd(_ isAlign : Bool) -> KittenParentMethods
     //the layout direct
