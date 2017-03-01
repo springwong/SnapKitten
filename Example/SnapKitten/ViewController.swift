@@ -28,8 +28,7 @@ class ViewController: UIViewController {
             .add(priorityExample())
             .add(alignLeftItems())
             .add(anotherExample())
-            .add(textViewA)
-            .add(textViewB)
+            .addChilds(textViewA, textViewB)
             .add(alignParentCard())
             .build();
         
