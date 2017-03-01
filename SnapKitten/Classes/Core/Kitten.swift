@@ -143,6 +143,12 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         }
         return self
     }
+    public func addChilds(_ childs : [UIView]) -> KittenChildMethods{
+        for child in childs{
+            _ = add(child)
+        }
+        return self
+    }
     public func with(_ child: UIView) -> KittenChildMethods {
         for item in childs{
             if child.isEqual(item.view){

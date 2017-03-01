@@ -14,4 +14,5 @@ public protocol KittenChild : KittenBuild{
     //change current updating item to child parameter, if child not exist, return a debug message
     func with(_ child : UIView) -> KittenChildMethods
     func addChilds(_ childs : UIView ...) -> KittenChildMethods
+    func addChilds(_ childs : [UIView]) -> KittenChildMethods
 }
