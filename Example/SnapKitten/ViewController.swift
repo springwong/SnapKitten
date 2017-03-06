@@ -30,6 +30,7 @@ class ViewController: UIViewController {
             .add(anotherExample())
             .addChilds(textViewA, textViewB)
             .add(alignParentCard())
+            .add(buttonAlignRightCase())
             .build();
         
         sv.attachContentView(contentView: mainView, scrollOrientation: .vertical)
@@ -128,6 +129,19 @@ class ViewController: UIViewController {
             .add(viewB).weight(2)
             .add(viewC).weight(1)
             .build()
+    }
+    
+    func buttonAlignRightCase() -> UIView{
+        let btn = UIButton()
+        let lbl = UILabel()
+        lbl.text = "123"
+        btn.backgroundColor = UIColor.red
+        btn.setTitle("Testing Lenght of button", for: .normal)
+        return Kitten.create(.horizontal).from().startPadding(10).endPadding(10)
+        .isAlignDirectionEnd(true)
+        .add(lbl).fillParent()
+        .add(btn)
+        .build()
     }
     func btnOnClick(){
         let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())

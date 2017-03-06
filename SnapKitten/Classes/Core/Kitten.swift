@@ -281,8 +281,9 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                 }
                 updateSize(perpendicularLength, perpendicularChildSize)
                 if child.isFillParent{
-                    orientationLength.equalToSuperview().priority(1)
-                    orientationLength.lessThanOrEqualToSuperview()
+//                    orientationLength.equalToSuperview().priority(1)
+//                    orientationLength.lessThanOrEqualToSuperview()
+                    end.equalToSuperview().priority(1)
                 }
                 
                 //todo : rethink if this feature appropriate
