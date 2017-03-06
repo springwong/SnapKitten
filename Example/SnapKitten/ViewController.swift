@@ -134,7 +134,7 @@ class ViewController: UIViewController {
     func buttonAlignRightCase() -> UIView{
         let btn = UIButton()
         let lbl = UILabel()
-        lbl.text = "123"
+        lbl.text = "123 "
         btn.backgroundColor = UIColor.red
         btn.setTitle("Testing Lenght of button", for: .normal)
         return Kitten.create(.horizontal).from().startPadding(10).endPadding(10)

@@ -161,6 +161,8 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     }
     public func fillParent() -> KittenChildMethods{
         currentChild?.isFillParent = true
+        //will not compress other item in default
+        currentChild?.priority = .medium
         return self
     }
     public func itemOffset(_ value : Int) -> KittenChildMethods{
@@ -281,8 +283,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                 }
                 updateSize(perpendicularLength, perpendicularChildSize)
                 if child.isFillParent{
-//                    orientationLength.equalToSuperview().priority(1)
-//                    orientationLength.lessThanOrEqualToSuperview()
                     end.equalToSuperview().priority(1)
                 }
                 
