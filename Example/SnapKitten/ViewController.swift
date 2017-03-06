@@ -19,11 +19,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-        _ = Kitten.create(.vertical).from(self)
+        Kitten.create(.vertical).from(self)
             .isAlignDirectionEnd(true)
             .add(sv).build()
         
-        _ = Kitten.create(KittenOrientation.vertical)
+        Kitten.create(KittenOrientation.vertical)
             .from(mainView).isAlignDirectionEnd(false)
             .add(priorityExample())
             .add(alignLeftItems())

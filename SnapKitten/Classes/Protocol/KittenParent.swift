@@ -10,8 +10,8 @@ import Foundation
 
 public protocol KittenParent : KittenBuild{
     //prepare the parent which will added our item to
-    func from(_ parent : UIView) -> KittenParentMethods
-    func from() -> KittenParentMethods
-    func from(_ parent : UIViewController) -> KittenParentMethods
-    func from(_ parent : UIScrollView) -> KittenParentMethods
+    @discardableResult func from(_ parent : UIView) -> KittenParentMethods
+    @discardableResult func from() -> KittenParentMethods
+    @discardableResult func from(_ parent : UIViewController) -> KittenParentMethods
+    @discardableResult func from(_ parent : UIScrollView) -> KittenParentMethods
 }

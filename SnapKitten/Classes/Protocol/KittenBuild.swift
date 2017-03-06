@@ -10,7 +10,7 @@ import Foundation
 
 public protocol KittenBuild {
     //setup the snapkit constraint
-    func build() -> UIView
+    @discardableResult func build() -> UIView
     //remove added subviews before setup the snapkit
-    func rebuild() -> UIView
+    @discardableResult func rebuild() -> UIView
 }
