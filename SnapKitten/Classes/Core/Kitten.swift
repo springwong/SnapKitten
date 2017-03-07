@@ -283,7 +283,9 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                 }
                 updateSize(perpendicularLength, perpendicularChildSize)
                 if child.isFillParent{
-                    end.equalToSuperview().priority(1)
+                    child.view.setContentHuggingPriority(250, for: orientation == .vertical ? .vertical : .horizontal)
+                }else{
+                    child.view.setContentHuggingPriority(1000, for: orientation == .vertical ? .vertical : .horizontal)
                 }
                 
                 //todo : rethink if this feature appropriate

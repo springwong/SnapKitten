@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         
         Kitten.create(KittenOrientation.vertical)
             .from(mainView).isAlignDirectionEnd(false)
+            .add(itemVerticals()).height(300, .equal)
             .add(priorityExample())
             .add(alignLeftItems())
             .add(anotherExample())
@@ -143,6 +144,30 @@ class ViewController: UIViewController {
         .add(btn)
         .build()
     }
+    
+    func itemVerticals() -> UIView{
+        let ivBanner = UIImageView()
+        let lblPlanName = UILabel()
+        let lblDesc = UILabel()
+        let lblPrice = UILabel()
+        let btnAction = UIButton()
+//        self.backgroundColor = UIColor.white
+        ivBanner.contentMode = .scaleAspectFit
+        lblPlanName.text = "123"
+        lblDesc.text = "12421"
+        lblPrice.text = "12321"
+        btnAction.setTitle("Test", for: .normal)
+        btnAction.backgroundColor = UIColor.blue
+        return Kitten.create(.vertical).from().defaultAlignment(.center).isAlignDirectionEnd(true)
+            .itemDefaultSideStartPadding(5).itemDefaultSideEndPadding(5).endPadding(5)
+            .add(ivBanner).sideEndPadding(0).sideStartPadding(0).align(.parent).height(80, .equal)
+            .add(lblPlanName).itemOffset(5)
+            .add(lblDesc)
+            .add(lblPrice).itemOffset(5)
+            .add(UIView()).fillParent()
+            .add(btnAction)
+            .build()
+    }
     func btnOnClick(){
         let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
         self.present(nv, animated: true, completion: nil)
@@ -153,6 +178,6 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
         
     }
-
+    
 }
 
