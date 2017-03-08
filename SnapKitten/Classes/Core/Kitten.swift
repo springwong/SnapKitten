@@ -33,10 +33,10 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     private init(_ orientation : KittenOrientation){
         self.orientation = orientation
     }
-    static public func create(_ orientation : KittenOrientation) -> KittenParent{
+    @discardableResult static public func create(_ orientation : KittenOrientation) -> KittenParent{
         return Kitten(orientation)
     }
-    public func from(_ parent : UIViewController) -> KittenParentMethods{
+    @discardableResult public func from(_ parent : UIViewController) -> KittenParentMethods{
         self.parent = parent.view
         self.parentTop = parent.topLayoutGuide == nil ? parent.view.snp.top : parent.topLayoutGuide.snp.bottom
         self.parentBottom = parent.bottomLayoutGuide == nil ? parent.view.snp.bottom : parent.bottomLayoutGuide.snp.top
@@ -44,7 +44,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.parentRight = parent.view.snp.right
         return self
     }
-    public func from(_ parent : UIScrollView) -> KittenParentMethods{
+    @discardableResult public func from(_ parent : UIScrollView) -> KittenParentMethods{
         self.parent = UIView()
         parent.attachContentView(contentView : self.parent!, scrollOrientation : self.orientation)
         self.parentTop = self.parent?.snp.top
@@ -53,7 +53,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.parentRight = self.parent?.snp.right
         return self
     }
-    public func from(_ parent : UIView) -> KittenParentMethods{
+    @discardableResult public func from(_ parent : UIView) -> KittenParentMethods{
         self.parent = parent
         self.parentTop = parent.snp.top
         self.parentBottom = parent.snp.bottom
@@ -61,7 +61,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.parentRight = parent.snp.right
         return self
     }
-    public func from() -> KittenParentMethods{
+    @discardableResult public func from() -> KittenParentMethods{
         self.parent = UIView()
         if let parent = self.parent{
             self.parentTop = parent.snp.top
@@ -71,64 +71,64 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         }
         return self
     }
-    public func parentTop(_ top : ConstraintItem) -> KittenParentMethods{
+    @discardableResult public func parentTop(_ top : ConstraintItem) -> KittenParentMethods{
         self.parentTop = top
         return self
     }
-    public func parentLeft(_ left : ConstraintItem) -> KittenParentMethods{
+    @discardableResult public func parentLeft(_ left : ConstraintItem) -> KittenParentMethods{
         self.parentLeft = left
         return self
     }
-    public func parentBottom(_ bottom : ConstraintItem) -> KittenParentMethods{
+    @discardableResult public func parentBottom(_ bottom : ConstraintItem) -> KittenParentMethods{
         self.parentBottom = bottom
         return self
     }
-    public func parentRight(_ right : ConstraintItem) -> KittenParentMethods{
+    @discardableResult public func parentRight(_ right : ConstraintItem) -> KittenParentMethods{
         self.parentRight = right
         return self
     }
-    public func defaultAlignment(_ alignment : KittenAlignment) -> KittenParentMethods{
+    @discardableResult public func defaultAlignment(_ alignment : KittenAlignment) -> KittenParentMethods{
         self.defaultAlignment = alignment
         return self
     }
-    public func startPadding(_ value : Int) -> KittenParentMethods{
+    @discardableResult public func startPadding(_ value : Int) -> KittenParentMethods{
         self.startPadding = value
         return self
     }
-    public func endPadding(_ value : Int) -> KittenParentMethods{
+    @discardableResult public func endPadding(_ value : Int) -> KittenParentMethods{
         self.endPadding = value
         return self
     }
-    public func itemDefaultOffset(_ value : Int)->KittenParentMethods{
+    @discardableResult public func itemDefaultOffset(_ value : Int)->KittenParentMethods{
         self.defaultItemOffset = value
         return self
     }
-    public func itemDefaultSideStartPadding(_ value : Int)->KittenParentMethods{
+    @discardableResult public func itemDefaultSideStartPadding(_ value : Int)->KittenParentMethods{
         self.defaultItemSideStartPadding = value
         return self
     }
-    public func itemDefaultSideEndPadding(_ value : Int)->KittenParentMethods{
+    @discardableResult public func itemDefaultSideEndPadding(_ value : Int)->KittenParentMethods{
         self.defaultItemSideEndPadding = value
         return self
     }
-    public func allPadding(_ value : Int)->KittenParentMethods{
+    @discardableResult public func allPadding(_ value : Int)->KittenParentMethods{
         self.defaultItemSideEndPadding = value
         self.defaultItemSideStartPadding = value
         self.startPadding = value
         self.endPadding = value
         return self
     }
-    public func isAlignDirectionEnd(_ isAlign : Bool) -> KittenParentMethods{
+    @discardableResult public func isAlignDirectionEnd(_ isAlign : Bool) -> KittenParentMethods{
         self.isAlignParentEnd = isAlign
         return self
     }
 
-    public func weightMode(_ isOn : Bool) -> KittenParentMethods{
+    @discardableResult public func weightMode(_ isOn : Bool) -> KittenParentMethods{
         self.isWeightMode = isOn
         return self
     }
     
-    public func add(_ child : UIView) -> KittenChildMethods{
+    @discardableResult public func add(_ child : UIView) -> KittenChildMethods{
         let item = KittenItem(child: child, alignment : defaultAlignment)
         item.sideStartPadding = defaultItemSideStartPadding
         item.sideEndPadding = defaultItemSideEndPadding
@@ -137,19 +137,19 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.currentChild = item
         return self
     }
-    public func addChilds(_ childs : UIView ...) -> KittenChildMethods{
+    @discardableResult public func addChilds(_ childs : UIView ...) -> KittenChildMethods{
         for child in childs{
             _ = add(child)
         }
         return self
     }
-    public func addChilds(_ childs : [UIView]) -> KittenChildMethods{
+    @discardableResult public func addChilds(_ childs : [UIView]) -> KittenChildMethods{
         for child in childs{
             _ = add(child)
         }
         return self
     }
-    public func with(_ child: UIView) -> KittenChildMethods {
+    @discardableResult public func with(_ child: UIView) -> KittenChildMethods {
         for item in childs{
             if child.isEqual(item.view){
                 self.currentChild = item
@@ -159,17 +159,17 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         debugPrint("SnapKitten Object with(child) : \(child.description) is not exist, current editing target remains")
         return self
     }
-    public func fillParent() -> KittenChildMethods{
+    @discardableResult public func fillParent() -> KittenChildMethods{
         currentChild?.isFillParent = true
         //will not compress other item in default
         currentChild?.priority = .medium
         return self
     }
-    public func itemOffset(_ value : Int) -> KittenChildMethods{
+    @discardableResult public func itemOffset(_ value : Int) -> KittenChildMethods{
         self.currentChild?.itemOffset = value
         return self
     }
-    public func sideStartPadding(_ value : Int) -> KittenChildMethods{
+    @discardableResult public func sideStartPadding(_ value : Int) -> KittenChildMethods{
         self.currentChild?.sideStartPadding = value
         return self
     }
@@ -182,32 +182,32 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
 //        self.currentChild?.ratio = ratio
 //        return self
 //    }
-    public func align(_ alignment : KittenAlignment) -> KittenChildMethods{
+    @discardableResult public func align(_ alignment : KittenAlignment) -> KittenChildMethods{
         self.currentChild?.alignment = alignment
         return self
     }
-    public func condition(_ condition : @escaping KittenInsertCondition) -> KittenChildMethods{
+    @discardableResult public func condition(_ condition : @escaping KittenInsertCondition) -> KittenChildMethods{
         self.currentChild?.insertCondition = condition
         return self
     }
-    public func width(_ value : Int?, _ condition : KittenSign = .equal) -> KittenChildMethods{
+    @discardableResult public func width(_ value : Int?, _ condition : KittenSign = .equal) -> KittenChildMethods{
         self.currentChild?.width = KittenDimension(value: value, condition: condition)
         return self
     }
-    public func height(_ value : Int?, _ condition : KittenSign = .equal) -> KittenChildMethods{
+    @discardableResult public func height(_ value : Int?, _ condition : KittenSign = .equal) -> KittenChildMethods{
         self.currentChild?.height = KittenDimension(value: value, condition: condition)
         return self
     }
-    public func size(_ value: Int?, _ condition : KittenSign = .equal) -> KittenChildMethods {
+    @discardableResult public func size(_ value: Int?, _ condition : KittenSign = .equal) -> KittenChildMethods {
         self.currentChild?.width = KittenDimension(value: value, condition: condition)
         self.currentChild?.height = KittenDimension(value: value, condition: condition)
         return self
     }
-    public func priority(_ priority : KittenPriority) -> KittenChildMethods{
+    @discardableResult public func priority(_ priority : KittenPriority) -> KittenChildMethods{
         self.currentChild?.priority = priority
         return self
     }
-    public func weight(_ value : Float) -> KittenChildMethods{
+    @discardableResult public func weight(_ value : Float) -> KittenChildMethods{
         self.currentChild?.weight = value
         return self
     }
@@ -222,12 +222,12 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
             return true
         })
     }
-    public func build() -> UIView{
+    @discardableResult public func build() -> UIView{
         mixBuild()
         return parent!
     }
     
-    public func rebuild() -> UIView{
+    @discardableResult public func rebuild() -> UIView{
         for subview in (parent?.subviews)!{
             subview.removeFromSuperview()
             subview.snp.removeConstraints()
