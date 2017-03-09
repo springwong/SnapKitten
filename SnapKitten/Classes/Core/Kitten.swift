@@ -111,6 +111,11 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.defaultItemSideEndPadding = value
         return self
     }
+    @discardableResult public func itemDefaultSidePadding(_ value : Int) -> KittenParentMethods{
+        self.defaultItemSideEndPadding = value
+        self.defaultItemSideStartPadding = value
+        return self
+    }
     @discardableResult public func allPadding(_ value : Int)->KittenParentMethods{
         self.defaultItemSideEndPadding = value
         self.defaultItemSideStartPadding = value
@@ -173,8 +178,13 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.currentChild?.sideStartPadding = value
         return self
     }
-    public func sideEndPadding(_ value : Int) -> KittenChildMethods{
+    @discardableResult public func sideEndPadding(_ value : Int) -> KittenChildMethods{
         self.currentChild?.sideEndPadding = value
+        return self
+    }
+    @discardableResult public func sidePadding(_ value : Int) -> KittenChildMethods{
+        self.currentChild?.sideEndPadding = value
+        self.currentChild?.sideStartPadding = value
         return self
     }
     //not implement currently

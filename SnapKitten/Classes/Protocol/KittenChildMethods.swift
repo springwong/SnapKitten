@@ -12,6 +12,7 @@ public protocol KittenChildMethods : KittenChild, KittenBuild{
     @discardableResult func itemOffset(_ value : Int) -> KittenChildMethods
     @discardableResult func sideStartPadding(_ value : Int) -> KittenChildMethods
     @discardableResult func sideEndPadding(_ value : Int) -> KittenChildMethods
+    @discardableResult func sidePadding(_ value : Int) -> KittenChildMethods
     //a ratio under current orientation
     //todo : have to separate later
 //    func ratio(_ ratio : Float) -> KittenChildMethods

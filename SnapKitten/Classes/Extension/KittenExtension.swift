@@ -17,7 +17,6 @@ public extension UIScrollView{
                 make.width.equalToSuperview()
                 make.left.right.equalToSuperview()
                 make.top.bottom.equalToSuperview()
-                
             case .horizontal:
                 make.height.equalToSuperview()
                 make.top.bottom.equalToSuperview()
