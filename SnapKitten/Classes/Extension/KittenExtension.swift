@@ -12,32 +12,17 @@ public extension UIScrollView{
     func attachContentView(contentView : UIView, scrollOrientation : KittenOrientation){
         self.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
-            if let parent = self.superview{
-                switch scrollOrientation{
-                case .vertical:
-                    make.width.equalTo(parent)
-                    make.left.right.equalToSuperview()
-                    make.top.bottom.equalToSuperview()
-                case .horizontal:
-                    make.height.equalTo(parent)
-                    make.left.right.equalToSuperview()
-                    make.top.bottom.equalToSuperview()
-                }
-            }else{
-                switch scrollOrientation{
-                case .vertical:
-                    make.width.equalToSuperview()
-                    //                make.width.equalToSuperview()
-                    make.left.right.equalToSuperview()
-                    make.top.bottom.equalToSuperview()
-                case .horizontal:
-                    make.height.equalToSuperview()
-                    //                make.height.equalToSuperview()
-                    make.top.bottom.equalToSuperview()
-                    make.left.right.equalToSuperview()
-                }
+            switch scrollOrientation{
+            case .vertical:
+                make.width.equalToSuperview()
+                make.left.right.equalToSuperview()
+                make.top.bottom.equalToSuperview()
+                
+            case .horizontal:
+                make.height.equalToSuperview()
+                make.top.bottom.equalToSuperview()
+                make.left.right.equalToSuperview()
             }
-            
         }
     }
 }
