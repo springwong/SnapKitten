@@ -165,14 +165,16 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return self
     }
     //as it originally no parameter, true as default
-    @discardableResult public func fillParent(_ isFillParent : Bool = true) -> KittenChildMethods{
-        currentChild?.isFillParent = isFillParent
+    @discardableResult public func fillParent() -> KittenChildMethods{
+        currentChild?.isFillParent = true
         //will not compress other item in default
-        if(isFillParent) {
-            currentChild?.priority = .medium
-        }else{
-            currentChild?.priority = .high
-        }
+        currentChild?.priority = .medium
+        return self
+    }
+    @discardableResult public func fitSize() -> KittenChildMethods {
+        //reverse fillParent setting
+        currentChild?.isFillParent = false
+        currentChild?.priority = .high
         return self
     }
     @discardableResult public func itemOffset(_ value : Int) -> KittenChildMethods{
