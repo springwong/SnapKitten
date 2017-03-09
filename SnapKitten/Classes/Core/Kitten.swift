@@ -164,10 +164,15 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         debugPrint("SnapKitten Object with(child) : \(child.description) is not exist, current editing target remains")
         return self
     }
-    @discardableResult public func fillParent() -> KittenChildMethods{
-        currentChild?.isFillParent = true
+    //as it originally no parameter, true as default
+    @discardableResult public func fillParent(_ isFillParent : Bool = true) -> KittenChildMethods{
+        currentChild?.isFillParent = isFillParent
         //will not compress other item in default
-        currentChild?.priority = .medium
+        if(isFillParent) {
+            currentChild?.priority = .medium
+        }else{
+            currentChild?.priority = .high
+        }
         return self
     }
     @discardableResult public func itemOffset(_ value : Int) -> KittenChildMethods{

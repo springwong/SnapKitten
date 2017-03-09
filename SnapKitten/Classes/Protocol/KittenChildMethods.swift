@@ -27,7 +27,7 @@ public protocol KittenChildMethods : KittenChild, KittenBuild{
     //check if item is added to kitten
     @discardableResult func condition(_ condition : @escaping KittenInsertCondition) -> KittenChildMethods
     //add a fill parent space, which always compress itself if no enough space in other items
-    @discardableResult func fillParent() -> KittenChildMethods
+    @discardableResult func fillParent(_ isFillParent : Bool) -> KittenChildMethods
     @discardableResult func priority(_ priority : KittenPriority) -> KittenChildMethods
     @discardableResult func weight(_ value : Float) -> KittenChildMethods
 }
