@@ -15,13 +15,17 @@ class ViewController: UIViewController {
     lazy var mainView = UIView()
     lazy var textViewA = UILabel()
     lazy var textViewB = UILabel()
+    
+    var kitten : Kitten?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-        Kitten.create(.vertical).from(self)
+        kitten = Kitten.create(.vertical).from(self)
             .isAlignDirectionEnd(true)
-            .add(sv).build()
+            .add(sv) as! Kitten
+            
+            kitten?.rebuild()
         
         Kitten.create(KittenOrientation.vertical)
             .from(mainView).isAlignDirectionEnd(false)
@@ -35,6 +39,8 @@ class ViewController: UIViewController {
             .build();
         
         sv.attachContentView(contentView: mainView, scrollOrientation: .vertical)
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -158,7 +164,7 @@ class ViewController: UIViewController {
         lblPrice.text = "12321"
         btnAction.setTitle("Test", for: .normal)
         btnAction.backgroundColor = UIColor.blue
-        return Kitten.create(.vertical).from().defaultAlignment(.center).isAlignDirectionEnd(true)
+        let container = Kitten.create(.vertical).from().defaultAlignment(.center).isAlignDirectionEnd(true)
             .itemDefaultSideStartPadding(5).itemDefaultSideEndPadding(5).endPadding(5)
             .add(ivBanner).sideEndPadding(0).sideStartPadding(0).align(.parent).height(80, .equal)
             .add(lblPlanName).itemOffset(5)
@@ -167,10 +173,13 @@ class ViewController: UIViewController {
             .add(UIView()).fillParent()
             .add(btnAction)
             .build()
+        container.backgroundColor = UIColor.green
+        return container
     }
     func btnOnClick(){
-        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
-        self.present(nv, animated: true, completion: nil)
+//        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
+//        self.present(nv, animated: true, completion: nil)
+        kitten?.rebuild()
     }
 
     override func didReceiveMemoryWarning() {
