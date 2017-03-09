@@ -246,8 +246,10 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     
     @discardableResult public func rebuild() -> UIView{
         for subview in (parent?.subviews)!{
-            subview.removeFromSuperview()
-            subview.snp.removeConstraints()
+            if(!NSStringFromClass(type(of: subview)).contains("_UILayoutGuide")){
+                subview.removeFromSuperview()
+                subview.snp.removeConstraints()
+            }
         }
         return build()
     }
