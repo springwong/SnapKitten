@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SnapKitten'
-  s.version          = '1.0.5'
+  s.version          = '1.0.6'
   s.summary          = 'A library based on SnapKit and Constraint system. It try to simplify the linear case of UI Constraint'
 
 # This description is used to generate tags and improve search results.
