@@ -25,6 +25,9 @@ internal final class CubItem {
     var leftAction : CubRelativeAction?
     var rightAction : CubRelativeAction?
     
+    var width : KittenDimension?
+    var height : KittenDimension?
+    
     init(view : UIView) {
         self.view = view
     }

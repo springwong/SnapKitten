@@ -108,86 +108,126 @@ public class Cub : CubParent, CubParentMethods, CubChildMethods, CubChild{
     }
     
     @discardableResult
-    public func rightOf(_ target: UIView, _ offset : Int = 0) -> CubChildMethods {
+    public func rightOf(_ target: UIView) -> CubChildMethods {
         currentChild?.leftAction = CubRelativeAction(target: target, action: .rightOf)
-        currentChild?.leftOffset = offset
         return self
     }
     
     @discardableResult
-    public func leftOf(_ target: UIView, _ offset : Int = 0) -> CubChildMethods {
+    public func leftOf(_ target: UIView) -> CubChildMethods {
         currentChild?.rightAction = CubRelativeAction(target: target, action: .leftOf)
-        currentChild?.rightOffset = offset
         return self
     }
     
     @discardableResult
-    public func below(_ target: UIView, _ offset : Int = 0) -> CubChildMethods {
+    public func below(_ target: UIView) -> CubChildMethods {
         currentChild?.topAction = CubRelativeAction(target: target, action: .below)
-        currentChild?.topOffset = offset
         return self
     }
     
     @discardableResult
-    public func above(_ target: UIView, _ offset : Int = 0) -> CubChildMethods {
+    public func above(_ target: UIView) -> CubChildMethods {
         currentChild?.bottomAction = CubRelativeAction(target: target, action: .above)
-        currentChild?.bottomOffset = offset
         return self
     }
     
     @discardableResult
-    public func alignBottom(_ target: UIView, _ offset : Int = 0) -> CubChildMethods {
+    public func alignBottom(_ target: UIView) -> CubChildMethods {
         currentChild?.bottomAction = CubRelativeAction(target: target, action: .alignBottom)
-        currentChild?.bottomOffset = offset
         return self
     }
     
     @discardableResult
-    public func alignRight(_ target: UIView, _ offset : Int = 0) -> CubChildMethods {
+    public func alignRight(_ target: UIView) -> CubChildMethods {
         currentChild?.rightAction = CubRelativeAction(target: target, action: .alignRight)
-        currentChild?.rightOffset = offset
         return self
     }
     
     @discardableResult
-    public func alignTop(_ target: UIView, _ offset : Int = 0) -> CubChildMethods {
+    public func alignTop(_ target: UIView) -> CubChildMethods {
         currentChild?.topAction = CubRelativeAction(target: target, action: .alignTop)
-        currentChild?.topOffset = offset
         return self
     }
     
     @discardableResult
-    public func alignLeft(_ target: UIView, _ offset : Int = 0) -> CubChildMethods {
+    public func alignLeft(_ target: UIView) -> CubChildMethods {
         currentChild?.leftAction = CubRelativeAction(target: target, action: .alignLeft)
-        currentChild?.leftOffset = offset
         return self
     }
     
     @discardableResult
-    public func alignParentRight(_ offset : Int = 0) -> CubChildMethods {
+    public func alignParentRight() -> CubChildMethods {
         currentChild?.rightAction = CubRelativeAction(target: nil, action: .alignParentRight)
-        currentChild?.rightOffset = offset
         return self
     }
     
     @discardableResult
-    public func alignParentLeft(_ offset : Int = 0) -> CubChildMethods {
+    public func alignParentLeft() -> CubChildMethods {
         currentChild?.leftAction = CubRelativeAction(target: nil, action: .alignParentLeft)
-        currentChild?.leftOffset = offset
         return self
     }
     
     @discardableResult
-    public func alignParentBottom(_ offset : Int = 0) -> CubChildMethods {
+    public func alignParentBottom() -> CubChildMethods {
         currentChild?.bottomAction = CubRelativeAction(target: nil, action: .alignParentBottom)
-        currentChild?.bottomOffset = offset
         return self
     }
     
     @discardableResult
-    public func alignParentTop(_ offset : Int = 0) -> CubChildMethods {
+    public func alignParentTop() -> CubChildMethods {
         currentChild?.topAction = CubRelativeAction(target: nil, action: .alignParentTop)
-        currentChild?.topOffset = offset
+        return self
+    }
+    
+    @discardableResult
+    public func offset(_ value: Int) -> CubChildMethods {
+        self.currentChild?.topOffset = value
+        self.currentChild?.bottomOffset = value
+        self.currentChild?.leftOffset = value
+        self.currentChild?.rightOffset = value
+        return self
+    }
+    
+    @discardableResult
+    public func rightOffset(_ value: Int) -> CubChildMethods {
+        self.currentChild?.rightOffset = value
+        return self
+    }
+    
+    @discardableResult
+    public func leftOffset(_ value: Int) -> CubChildMethods {
+        self.currentChild?.leftOffset = value
+        return self
+    }
+    
+    @discardableResult
+    public func topOffset(_ value: Int) -> CubChildMethods {
+        self.currentChild?.topOffset = value
+        return self
+    }
+    
+    @discardableResult
+    public func bottomOffset(_ value: Int) -> CubChildMethods {
+        self.currentChild?.bottomOffset = value
+        return self
+    }
+    
+    @discardableResult
+    public func size(_ value: Int?, _ condition: KittenSign) -> CubChildMethods {
+        self.currentChild?.height = KittenDimension(value: value, condition: condition)
+        self.currentChild?.width = KittenDimension(value: value, condition: condition)
+        return self
+    }
+    
+    @discardableResult
+    public func height(_ value: Int?, _ condition: KittenSign) -> CubChildMethods {
+        self.currentChild?.height = KittenDimension(value: value, condition: condition)
+        return self
+    }
+    
+    @discardableResult
+    public func width(_ value: Int?, _ condition: KittenSign) -> CubChildMethods {
+        self.currentChild?.width = KittenDimension(value: value, condition: condition)
         return self
     }
     
@@ -275,6 +315,9 @@ public class Cub : CubParent, CubParentMethods, CubChildMethods, CubChild{
                 if !isRightAssigned {
                     make.right.lessThanOrEqualToSuperview().offset(-1 * child.rightOffset)
                 }
+                
+                KittenCommonMethod.updateSize(make.width, child.width)
+                KittenCommonMethod.updateSize(make.height, child.height)
             })
         }
         return parent!

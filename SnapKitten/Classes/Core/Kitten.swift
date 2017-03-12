@@ -298,9 +298,9 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                             end.lessThanOrEqualTo(parentEnd!).offset(-endPadding)
                         }
                     }
-                    updateSize(orientationLength, orientationChildSize)
+                    KittenCommonMethod.updateSize(orientationLength, orientationChildSize)
                 }
-                updateSize(perpendicularLength, perpendicularChildSize)
+                KittenCommonMethod.updateSize(perpendicularLength, perpendicularChildSize)
                 if child.isFillParent{
                     child.view.setContentHuggingPriority(250, for: orientation == .vertical ? .vertical : .horizontal)
                 }else{
@@ -342,18 +342,18 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
             end.equalToSuperview().offset(-child.sideEndPadding)
         }
     }
-    private func updateSize(_ extendable : ConstraintMakerExtendable, _ condition : KittenDimension?){
-        if let condition = condition{
-            if let value = condition.value{
-                switch condition.condition {
-                case .equal:
-                    extendable.equalTo(value)
-                case .max:
-                    extendable.lessThanOrEqualTo(value)
-                case .min:
-                    extendable.greaterThanOrEqualTo(value)
-                }
-            }
-        }
-    }
+//    private func updateSize(_ extendable : ConstraintMakerExtendable, _ condition : KittenDimension?){
+//        if let condition = condition{
+//            if let value = condition.value{
+//                switch condition.condition {
+//                case .equal:
+//                    extendable.equalTo(value)
+//                case .max:
+//                    extendable.lessThanOrEqualTo(value)
+//                case .min:
+//                    extendable.greaterThanOrEqualTo(value)
+//                }
+//            }
+//        }
+//    }
 }

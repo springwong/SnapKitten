@@ -30,32 +30,26 @@ class ViewController: UIViewController {
         
         let ivA = UIImageView()
         ivA.backgroundColor = UIColor.red
-        ivA.snp.makeConstraints { (make) in
-            make.width.height.equalTo(40)
-        }
         
         let ivB = UIImageView()
         ivB.backgroundColor = UIColor.blue
-        ivB.snp.makeConstraints { (make) in
-            make.width.height.equalTo(80)
-        }
-        
+
         let lblA = UILabel()
         lblA.numberOfLines = 0
         lblA.textColor = UIColor.white
         lblA.text = "wekj voweijvew voiew voiwehoiewhvoiweh voiwehwehoiwehvi hweipv hweiuvbweiuvbweiuvbew iubewiu "
         
         let cub = Cub.create().from().defaultOffset(10)
-            .add(ivA)
-            .rightOf(ivB, 0).alignBottom(ivB, 0)
-            .add(ivB).centerY(true)//.alignParentLeft()
-            .add(lblA).rightOf(ivA, 0).alignParentTop(0)
+            .add(ivA).size(40, .equal).offset(10)
+            .add(ivB).size(20, .equal).alignParentTop().alignParentRight().offset(0)
+            //.centerY(true).size(80, .equal)//.alignParentLeft()
+//            .add(lblA).rightOf(ivA).alignParentTop().topOffset(0)
             .build()
         cub.backgroundColor = UIColor.black
         
         Kitten.create(KittenOrientation.vertical)
             .from(mainView).isAlignDirectionEnd(false)
-            .add(cub)
+            .add(cub).align(.start)
             .add(itemVerticals()).height(300, .equal)
             .add(priorityExample())
             .add(alignLeftItems())
