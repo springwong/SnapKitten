@@ -39,9 +39,9 @@ class ViewController: UIViewController {
         lblA.textColor = UIColor.white
         lblA.text = "wekj voweijvew voiew voiwehoiewhvoiweh voiwehwehoiwehvi hweipv hweiuvbweiuvbweiuvbew iubewiu "
         
-        let cub = Cub.create().from().defaultOffset(10)
+        let cub = Cub.create().from()
             .add(ivA).size(40, .equal).offset(10)
-            .add(ivB).size(20, .equal).alignParentTop().alignParentRight().offset(0)
+            .add(ivB).size(20, .equal).alignRight(ivA).alignParentBottom().rightOffset(-10)
             //.centerY(true).size(80, .equal)//.alignParentLeft()
 //            .add(lblA).rightOf(ivA).alignParentTop().topOffset(0)
             .build()
