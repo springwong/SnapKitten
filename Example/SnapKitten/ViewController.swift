@@ -23,12 +23,39 @@ class ViewController: UIViewController {
         updateUI()
         kitten = Kitten.create(.vertical).from(self)
             .isAlignDirectionEnd(true)
-            .add(sv) as! Kitten
+            .add(sv) as? Kitten
             
             kitten?.rebuild()
         
+        
+        let ivA = UIImageView()
+        ivA.backgroundColor = UIColor.red
+        ivA.snp.makeConstraints { (make) in
+            make.width.height.equalTo(40)
+        }
+        
+        let ivB = UIImageView()
+        ivB.backgroundColor = UIColor.blue
+        ivB.snp.makeConstraints { (make) in
+            make.width.height.equalTo(80)
+        }
+        
+        let lblA = UILabel()
+        lblA.numberOfLines = 0
+        lblA.textColor = UIColor.white
+        lblA.text = "wekj voweijvew voiew voiwehoiewhvoiweh voiwehwehoiwehvi hweipv hweiuvbweiuvbweiuvbew iubewiu "
+        
+        let cub = Cub.create().from().defaultOffset(10)
+            .add(ivA)
+            .rightOf(ivB, 0).alignBottom(ivB, 0)
+            .add(ivB).centerY(true)//.alignParentLeft()
+            .add(lblA).rightOf(ivA, 0).alignParentTop(0)
+            .build()
+        cub.backgroundColor = UIColor.black
+        
         Kitten.create(KittenOrientation.vertical)
             .from(mainView).isAlignDirectionEnd(false)
+            .add(cub)
             .add(itemVerticals()).height(300, .equal)
             .add(priorityExample())
             .add(alignLeftItems())
