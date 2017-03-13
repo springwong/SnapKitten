@@ -13,6 +13,7 @@ public protocol KittenChild : KittenBuild{
     @discardableResult func add(_ child : UIView) -> KittenChildMethods
     //change current updating item to child parameter, if child not exist, return a debug message
     @discardableResult func with(_ child : UIView) -> KittenChildMethods
+    //add a list of child to Kitten, current object point to last object of the list
     @discardableResult func addChilds(_ childs : UIView ...) -> KittenChildMethods
     @discardableResult func addChilds(_ childs : [UIView]) -> KittenChildMethods
 }
