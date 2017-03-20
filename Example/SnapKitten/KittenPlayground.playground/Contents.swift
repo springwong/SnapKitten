@@ -4,50 +4,38 @@ import UIKit
 import SnapKitten
 import PlaygroundSupport
 
-var str = "Hello, playground"
+//var str = "Hello, playground"
 
-PlaygroundPage.current.needsIndefiniteExecution = false
 
-let container = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
-container.backgroundColor = UIColor.blue
 
-PlaygroundPage.current.liveView = container
-let btn = UIButton()
-btn.setTitle("Button", for: .normal)
-btn.backgroundColor = .red
+let virtualView = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 736))
+virtualView.backgroundColor = UIColor.white
 
-let lbl = UILabel()
-lbl.text = "testing"
-lbl.numberOfLines = 0
-lbl.backgroundColor = UIColor.green
+//uncomment this code if layout to not display
+//PlaygroundPage.current.needsIndefiniteExecution = true
+PlaygroundPage.current.liveView = virtualView
 
-let lbl2 = UILabel()
-lbl2.text = "122"
-let btn2 = UIButton()
-btn2.setTitle("Button", for: .normal)
-btn2.backgroundColor = UIColor.brown
-btn.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+let v1 = UIView()
+let v2 = UIView()
+let v3 = UIView()
+let lblA = UILabel()
+let lblB = UILabel()
+let lblC = UILabel()
+lblB.numberOfLines = 0
+lblA.text = "Hello"
+lblB.text = "!! gberi beribv ierbviernv ioernviorv ioerniovnerioreio nrv ierbiuehiuvb euieurv ueve h"
+lblC.text = "World"
 
-let iv = UIImageView()
-iv.backgroundColor = UIColor.black
+v1.backgroundColor = UIColor.red
+v2.backgroundColor = UIColor.green
+v3.backgroundColor = UIColor.blue
 
-let sv = UIScrollView()
-Kitten.create(.vertical).from(container).isAlignDirectionEnd(true)
-.add(sv).fillParent()
-.build()
-
-let component = Kitten.create(.horizontal).from().isAlignDirectionEnd(true)
-//    .endPadding(10)
-    .itemDefaultSidePadding(10)
-    .defaultAlignment(.center)
-    .add(iv).size(40, .equal)
-    .add(lbl).priority(.medium)
-    .add(UIView()).fillParent()
-    .add(btn).itemOffset(5)
-    .add(btn2).condition({false})
+Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
+    .add(v1)
+    .add(v2)
+    .add(v3).fillParent()
     .build()
-component.backgroundColor = UIColor.yellow
 
-Kitten.create(.vertical).from(sv)
-.add(component)
-.build()
+Kitten.create(.horizontal).from(v1).defaultAlignment(.start).allPadding(10).add(lblA).build()
+Kitten.create(.horizontal).from(v2).add(lblB).build()
+Kitten.create(.horizontal).from(v3).allPadding(10).add(lblC).build()

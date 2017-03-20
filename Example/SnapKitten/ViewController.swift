@@ -21,47 +21,83 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-        kitten = Kitten.create(.vertical).from(self)
-            .isAlignDirectionEnd(true)
-            .add(sv) as? Kitten
-            
-            kitten?.rebuild()
+        testingBugs(virtualView: self.view)
+//        kitten = Kitten.create(.vertical).from(self)
+//            .isAlignDirectionEnd(true)
+//            .add(sv) as? Kitten
+//            
+//            kitten?.rebuild()
+//        
+//        
+//        let ivA = UIImageView()
+//        ivA.backgroundColor = UIColor.red
+//        
+//        let ivB = UIImageView()
+//        ivB.backgroundColor = UIColor.blue
+//
+//        let lblA = UILabel()
+//        lblA.numberOfLines = 0
+//        lblA.textColor = UIColor.white
+//        lblA.text = "wekj voweijvew voiew voiwehoiewhvoiweh voiwehwehoiwehvi hweipv hweiuvbweiuvbweiuvbew iubewiu "
+//        
+//        let cub = Cub.create().from()
+//            .add(ivA).size(40, .equal).offset(10)
+//            .add(ivB).size(20, .equal).alignRight(ivA).alignParentBottom().rightOffset(-10)
+//            //.centerY(true).size(80, .equal)//.alignParentLeft()
+////            .add(lblA).rightOf(ivA).alignParentTop().topOffset(0)
+//            .build()
+//        cub.backgroundColor = UIColor.black
+//        
+//        Kitten.create(KittenOrientation.vertical)
+//            .from(mainView).isAlignDirectionEnd(false)
+//            .add(cub).align(.start)
+//            .add(itemVerticals()).height(300, .equal)
+//            .add(priorityExample())
+//            .add(alignLeftItems())
+//            .add(anotherExample())
+//            .addChilds(textViewA, textViewB)
+//            .add(alignParentCard())
+//            .add(buttonAlignRightCase())
+//            .build();
+//        
+//        sv.attachContentView(contentView: mainView, scrollOrientation: .vertical)
         
         
-        let ivA = UIImageView()
-        ivA.backgroundColor = UIColor.red
-        
-        let ivB = UIImageView()
-        ivB.backgroundColor = UIColor.blue
-
+    }
+    
+    func testingBugs(virtualView : UIView){
+        let v1 = UIView()
+        let v2 = UIView()
+        let v3 = UIView()
         let lblA = UILabel()
-        lblA.numberOfLines = 0
-        lblA.textColor = UIColor.white
-        lblA.text = "wekj voweijvew voiew voiwehoiewhvoiweh voiwehwehoiwehvi hweipv hweiuvbweiuvbweiuvbew iubewiu "
+        let lblB = UILabel()
+        let lblC = UILabel()
+        let lblD = UILabel()
+        lblB.numberOfLines = 0
+        lblA.text = "Hello"
+        lblB.text = "!! gberi beribv ierbviernv ioernviorv ioerniovnerioreio nrv ierbiuehiuvb euieurv ueve h"
+        lblC.text = "World"
+        lblD.text = "testing"
         
-        let cub = Cub.create().from()
-            .add(ivA).size(40, .equal).offset(10)
-            .add(ivB).size(20, .equal).alignRight(ivA).alignParentBottom().rightOffset(-10)
-            //.centerY(true).size(80, .equal)//.alignParentLeft()
-//            .add(lblA).rightOf(ivA).alignParentTop().topOffset(0)
+        v1.backgroundColor = UIColor.red
+        v2.backgroundColor = UIColor.green
+        v3.backgroundColor = UIColor.blue
+
+        Kitten.create(.vertical).from(v1).defaultAlignment(.start)
+            .allPadding(10)
+            .add(lblA).build()
+        Kitten.create(.vertical).from(v2)
+            .add(lblB).add(lblD)
             .build()
-        cub.backgroundColor = UIColor.black
+        Kitten.create(.vertical).from(v3)
+            .allPadding(10)
+            .add(lblC).build()
         
-        Kitten.create(KittenOrientation.vertical)
-            .from(mainView).isAlignDirectionEnd(false)
-            .add(cub).align(.start)
-            .add(itemVerticals()).height(300, .equal)
-            .add(priorityExample())
-            .add(alignLeftItems())
-            .add(anotherExample())
-            .addChilds(textViewA, textViewB)
-            .add(alignParentCard())
-            .add(buttonAlignRightCase())
-            .build();
-        
-        sv.attachContentView(contentView: mainView, scrollOrientation: .vertical)
-        
-        
+        Kitten.create(.vertical).from(virtualView)
+            .add(v1)
+            .add(v2)
+            .add(v3)
+            .build()
     }
     
     override func viewDidAppear(_ animated: Bool) {
