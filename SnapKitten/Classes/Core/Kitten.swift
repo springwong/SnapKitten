@@ -37,20 +37,20 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return Kitten(orientation)
     }
     @discardableResult public func from(_ parent : UIViewController) -> KittenParentMethods{
-//        self.parent = parent.view
+        self.parent = parent.view
         self.parentTop = parent.topLayoutGuide.snp.bottom
         self.parentBottom = parent.bottomLayoutGuide.snp.top
         self.parentLeft = parent.view.snp.left
         self.parentRight = parent.view.snp.right
         
-        self.parent = UIView()
-        
-        parent.view.addSubview(self.parent!)
-        self.parent?.snp.makeConstraints({ (make) in
-            make.top.equalTo(parent.topLayoutGuide.snp.bottom)
-            make.bottom.lessThanOrEqualTo(parent.bottomLayoutGuide.snp.top)
-            make.left.right.equalTo(parent.view)
-        })
+//        self.parent = IntrinicUIView()
+//        
+//        parent.view.addSubview(self.parent!)
+//        self.parent?.snp.makeConstraints({ (make) in
+//            make.top.equalTo(parent.topLayoutGuide.snp.bottom)
+//            make.bottom.lessThanOrEqualTo(parent.bottomLayoutGuide.snp.top)
+//            make.left.right.equalTo(parent.view)
+//        })
 //        self.parentTop = self.parent?.snp.top
 //        self.parentBottom = self.parent?.snp.bottom
 //        self.parentLeft = self.parent?.snp.left
@@ -58,7 +58,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return self
     }
     @discardableResult public func from(_ parent : UIScrollView) -> KittenParentMethods{
-        self.parent = UIView()
+        self.parent = IntrinicUIView()
         parent.attachContentView(contentView : self.parent!, scrollOrientation : self.orientation)
         self.parentTop = self.parent?.snp.top
         self.parentBottom = self.parent?.snp.bottom
@@ -75,7 +75,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return self
     }
     @discardableResult public func from() -> KittenParentMethods{
-        self.parent = UIView()
+        self.parent = IntrinicUIView()
         if let parent = self.parent{
             self.parentTop = parent.snp.top
             self.parentBottom = parent.snp.bottom
@@ -290,25 +290,25 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                     , child)
                 if isWeightMode{
                     if insertItems.first?.view == child.view{
-                        start.equalToSuperview().offset(startPadding)
+                        start.equalTo(parentStart!).offset(startPadding)
                     }else{
                         start.equalTo(lastEnd!).offset(child.itemOffset)
                         orientationLength.equalTo((insertItems.first?.view)!).multipliedBy(child.weight / totalWeight!)
                     }
                     if (insertItems.last?.view == (child.view)){
-                        end.equalToSuperview().offset(-endPadding)
+                        end.equalTo(parentEnd!).offset(-endPadding)
                     }
                 }else{
                     if (insertItems.first?.view == (child.view)) {
-                        start.equalToSuperview().offset(startPadding)
+                        start.equalTo(parentStart!).offset(startPadding)
                     }else{
                         start.equalTo(lastEnd!).offset(child.itemOffset)
                     }
                     if (insertItems.last?.view == (child.view)){
                         if isAlignParentEnd{
-                            end.equalToSuperview().offset(-endPadding)
+                            end.equalTo(parentEnd!).offset(-endPadding)
                         }else{
-                            end.lessThanOrEqualToSuperview().offset(-endPadding)
+                            end.lessThanOrEqualTo(parentEnd!).offset(-endPadding)
                         }
                     }
                     KittenCommonMethod.updateSize(orientationLength, orientationChildSize)
@@ -327,17 +327,17 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                 previousChild = child.view
             })
         }
-        if isAlignParentEnd {
-            if parent?.superview != nil {
-                parent?.snp.makeConstraints({ (make) in
-                    if orientation == .vertical {
-                        make.bottom.equalTo(self.parentBottom!)
-                    }else{
-                        make.right.equalTo(self.parentRight!)
-                    }
-                })
-            }
-        }
+//        if isAlignParentEnd {
+//            if parent?.superview != nil {
+//                parent?.snp.makeConstraints({ (make) in
+//                    if orientation == .vertical {
+//                        make.bottom.equalTo(self.parentBottom!)
+//                    }else{
+//                        make.right.equalTo(self.parentRight!)
+//                    }
+//                })
+//            }
+//        }
     }
     private func updateCompressionResistance(_ axis : UILayoutConstraintAxis, _ child : KittenItem){
         switch child.priority {

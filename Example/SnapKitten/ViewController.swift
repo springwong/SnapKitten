@@ -21,47 +21,44 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-        testingBugs(virtualView: self)
-//        kitten = Kitten.create(.vertical).from(self)
-//            .isAlignDirectionEnd(true)
-//            .add(sv).fillParent() as? Kitten
-//            
-//            kitten?.rebuild()
-//        
-//        
-//        let ivA = UIImageView()
-//        ivA.backgroundColor = UIColor.red
-//        
-//        let ivB = UIImageView()
-//        ivB.backgroundColor = UIColor.blue
-//
-//        let lblA = UILabel()
-//        lblA.numberOfLines = 0
-//        lblA.textColor = UIColor.white
-//        lblA.text = "wekj voweijvew voiew voiwehoiewhvoiweh voiwehwehoiwehvi hweipv hweiuvbweiuvbweiuvbew iubewiu "
-//        
-//        let cub = Cub.create().from()
-//            .add(ivA).size(40, .equal).offset(10)
-//            .add(ivB).size(20, .equal).alignRight(ivA).alignParentBottom().rightOffset(-10)
-//            //.centerY(true).size(80, .equal)//.alignParentLeft()
-////            .add(lblA).rightOf(ivA).alignParentTop().topOffset(0)
-//            .build()
-//        cub.backgroundColor = UIColor.black
-//        
-//        Kitten.create(KittenOrientation.vertical)
-//            .from(sv).isAlignDirectionEnd(false)
-//            .add(cub).align(.start)
-//            .add(itemVerticals()).height(300, .equal)
-//            .add(priorityExample())
-//            .add(alignLeftItems())
-//            .add(anotherExample())
-//            .addChilds(textViewA, textViewB)
-//            .add(alignParentCard())
-//            .add(buttonAlignRightCase())
-//            .build();
-//        
+//        testingBugs(virtualView: self)
+        kitten = Kitten.create(.vertical).from(self)
+            .isAlignDirectionEnd(true)
+            .add(sv).fillParent() as? Kitten
+            
+            kitten?.rebuild()
         
         
+        let ivA = UIImageView()
+        ivA.backgroundColor = UIColor.red
+        
+        let ivB = UIImageView()
+        ivB.backgroundColor = UIColor.blue
+
+        let lblA = UILabel()
+        lblA.numberOfLines = 0
+        lblA.textColor = UIColor.white
+        lblA.text = "wekj voweijvew voiew voiwehoiewhvoiweh voiwehwehoiwehvi hweipv hweiuvbweiuvbweiuvbew iubewiu "
+        
+        let cub = Cub.create().from()
+            .add(ivA).size(40, .equal).offset(10)
+            .add(ivB).size(20, .equal).alignRight(ivA).alignParentBottom().rightOffset(-10)
+            //.centerY(true).size(80, .equal)//.alignParentLeft()
+//            .add(lblA).rightOf(ivA).alignParentTop().topOffset(0)
+            .build()
+        cub.backgroundColor = UIColor.black
+        
+        Kitten.create(KittenOrientation.vertical)
+            .from(sv).isAlignDirectionEnd(false)
+            .add(cub).align(.start)
+            .add(itemVerticals()).height(300, .equal)
+            .add(priorityExample())
+            .add(alignLeftItems())
+            .add(anotherExample())
+            .addChilds(textViewA, textViewB)
+            .add(buttonAlignRightCase())
+            .add(alignParentCard())
+            .build();
     }
     
     func testingBugs(virtualView : UIViewController){
@@ -97,8 +94,8 @@ class ViewController: UIViewController {
         Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
             .add(v1)
             .add(v2)
-            .add(v3)
-            .add(IntrinicUIView()).fillParent()
+            .add(v3).fillParent()
+            .add(IntrinicUIView())
             .build()
     }
     
@@ -191,7 +188,7 @@ class ViewController: UIViewController {
         
         return Kitten.create(.horizontal).from()
             .weightMode(true).itemDefaultOffset(10).startPadding(20).endPadding(20)
-            .add(viewA).weight(3)
+            .add(viewA).weight(3).height(40, .equal)
             .add(viewB).weight(2)
             .add(viewC).weight(1)
             .build()
@@ -203,7 +200,7 @@ class ViewController: UIViewController {
         lbl.text = "123 "
         btn.backgroundColor = UIColor.red
         btn.setTitle("Testing Lenght of button", for: .normal)
-        return Kitten.create(.horizontal).from().startPadding(10).endPadding(10)
+        return Kitten.create(.horizontal).from().startPadding(10).endPadding(10).defaultAlignment(.center)
         .isAlignDirectionEnd(true)
         .add(lbl).fillParent()
         .add(btn)

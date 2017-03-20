@@ -5,7 +5,7 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - SnapKit (3.2.0)
-  - SnapKitten (1.0.6):
+  - SnapKitten (1.0.10):
     - SnapKit (~> 3.2.0)
 
 DEPENDENCIES:
@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SnapKitten: dd90d9a9f77decb0298c2e09e10e40894a93c8cf
+  SnapKitten: 0035f5a05a48b4650245beae7e5085a2317c2c7e
 
 PODFILE CHECKSUM: 14028b240a293464f7b6e771317209067b1bc664
 
