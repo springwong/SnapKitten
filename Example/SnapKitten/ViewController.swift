@@ -21,10 +21,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-        testingBugs(virtualView: self.view)
+        testingBugs(virtualView: self)
 //        kitten = Kitten.create(.vertical).from(self)
 //            .isAlignDirectionEnd(true)
-//            .add(sv) as? Kitten
+//            .add(sv).fillParent() as? Kitten
 //            
 //            kitten?.rebuild()
 //        
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
 //        cub.backgroundColor = UIColor.black
 //        
 //        Kitten.create(KittenOrientation.vertical)
-//            .from(mainView).isAlignDirectionEnd(false)
+//            .from(sv).isAlignDirectionEnd(false)
 //            .add(cub).align(.start)
 //            .add(itemVerticals()).height(300, .equal)
 //            .add(priorityExample())
@@ -60,29 +60,30 @@ class ViewController: UIViewController {
 //            .add(buttonAlignRightCase())
 //            .build();
 //        
-//        sv.attachContentView(contentView: mainView, scrollOrientation: .vertical)
         
         
     }
     
-    func testingBugs(virtualView : UIView){
-        let v1 = UIView()
-        let v2 = UIView()
-        let v3 = UIView()
+    func testingBugs(virtualView : UIViewController){
+        
+        let v1 = IntrinicUIView()
+        let v2 = IntrinicUIView()
+        let v3 = IntrinicUIView()
         let lblA = UILabel()
         let lblB = UILabel()
         let lblC = UILabel()
         let lblD = UILabel()
         lblB.numberOfLines = 0
-        lblA.text = "Hello"
-        lblB.text = "!! gberi beribv ierbviernv ioernviorv ioerniovnerioreio nrv ierbiuehiuvb euieurv ueve h"
+        lblA.text = "Hellv ermopvjeroveorv eoprj voper opermvop emropvmeropv meropvmerpomv peormv poer meoprmo"
+        lblB.text = "!! gberi beribv ierbviernv ioer kneon voewn owvowovnweo nweov woehi bijbeiv bwei vbwibvweibv weibiwebweibi gkeorpgj erpj "
         lblC.text = "World"
         lblD.text = "testing"
         
         v1.backgroundColor = UIColor.red
         v2.backgroundColor = UIColor.green
         v3.backgroundColor = UIColor.blue
-
+        
+        
         Kitten.create(.vertical).from(v1).defaultAlignment(.start)
             .allPadding(10)
             .add(lblA).build()
@@ -93,10 +94,11 @@ class ViewController: UIViewController {
             .allPadding(10)
             .add(lblC).build()
         
-        Kitten.create(.vertical).from(virtualView)
+        Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
             .add(v1)
             .add(v2)
             .add(v3)
+            .add(IntrinicUIView()).fillParent()
             .build()
     }
     
@@ -234,9 +236,9 @@ class ViewController: UIViewController {
         return container
     }
     func btnOnClick(){
-//        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
-//        self.present(nv, animated: true, completion: nil)
-        kitten?.rebuild()
+        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
+        self.present(nv, animated: true, completion: nil)
+//        kitten?.rebuild()
     }
 
     override func didReceiveMemoryWarning() {

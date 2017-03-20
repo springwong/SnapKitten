@@ -37,11 +37,24 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return Kitten(orientation)
     }
     @discardableResult public func from(_ parent : UIViewController) -> KittenParentMethods{
-        self.parent = parent.view
+//        self.parent = parent.view
         self.parentTop = parent.topLayoutGuide.snp.bottom
         self.parentBottom = parent.bottomLayoutGuide.snp.top
         self.parentLeft = parent.view.snp.left
         self.parentRight = parent.view.snp.right
+        
+        self.parent = UIView()
+        
+        parent.view.addSubview(self.parent!)
+        self.parent?.snp.makeConstraints({ (make) in
+            make.top.equalTo(parent.topLayoutGuide.snp.bottom)
+            make.bottom.lessThanOrEqualTo(parent.bottomLayoutGuide.snp.top)
+            make.left.right.equalTo(parent.view)
+        })
+//        self.parentTop = self.parent?.snp.top
+//        self.parentBottom = self.parent?.snp.bottom
+//        self.parentLeft = self.parent?.snp.left
+//        self.parentRight = self.parent?.snp.right
         return self
     }
     @discardableResult public func from(_ parent : UIScrollView) -> KittenParentMethods{
@@ -283,19 +296,19 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                         orientationLength.equalTo((insertItems.first?.view)!).multipliedBy(child.weight / totalWeight!)
                     }
                     if (insertItems.last?.view == (child.view)){
-                        end.equalTo(parentEnd!).offset(-endPadding)
+                        end.equalToSuperview().offset(-endPadding)
                     }
                 }else{
                     if (insertItems.first?.view == (child.view)) {
-                        start.equalTo(parentStart!).offset(startPadding)
+                        start.equalToSuperview().offset(startPadding)
                     }else{
                         start.equalTo(lastEnd!).offset(child.itemOffset)
                     }
                     if (insertItems.last?.view == (child.view)){
                         if isAlignParentEnd{
-                            end.equalTo(parentEnd!).offset(-endPadding)
+                            end.equalToSuperview().offset(-endPadding)
                         }else{
-                            end.lessThanOrEqualTo(parentEnd!).offset(-endPadding)
+                            end.lessThanOrEqualToSuperview().offset(-endPadding)
                         }
                     }
                     KittenCommonMethod.updateSize(orientationLength, orientationChildSize)
@@ -313,6 +326,17 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
 //                }
                 previousChild = child.view
             })
+        }
+        if isAlignParentEnd {
+            if parent?.superview != nil {
+                parent?.snp.makeConstraints({ (make) in
+                    if orientation == .vertical {
+                        make.bottom.equalTo(self.parentBottom!)
+                    }else{
+                        make.right.equalTo(self.parentRight!)
+                    }
+                })
+            }
         }
     }
     private func updateCompressionResistance(_ axis : UILayoutConstraintAxis, _ child : KittenItem){
