@@ -38,31 +38,19 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return Kitten(orientation)
     }
     @discardableResult public func from(_ parent : UIViewController) -> KittenParentMethods{
-//        self.parent = parent.view
         self.parentTop = parent.topLayoutGuide.snp.bottom
         self.parentBottom = parent.bottomLayoutGuide.snp.top
         self.parentLeft = parent.view.snp.left
         self.parentRight = parent.view.snp.right
         
         self.parent = parent.view
-        self.container = IntrinicUIView()
+        self.container = UIView()
 
-//        parent.view.addSubview(self.parent!)
-//        self.parent?.snp.makeConstraints({ (make) in
-//            make.top.equalTo(parent.topLayoutGuide.snp.bottom)
-//            make.bottom.lessThanOrEqualTo(parent.bottomLayoutGuide.snp.top)
-//            make.left.right.equalTo(parent.view)
-//        })
-//        self.parentTop = self.parent?.snp.top
-//        self.parentBottom = self.parent?.snp.bottom
-//        self.parentLeft = self.parent?.snp.left
-//        self.parentRight = self.parent?.snp.right
         return self
     }
     @discardableResult public func from(_ parent : UIScrollView) -> KittenParentMethods{
         self.parent = parent
         self.container = UIView()
-//        parent.attachContentView(contentView : self.parent!, scrollOrientation : self.orientation)
         self.parentTop = self.parent?.snp.top
         self.parentBottom = self.parent?.snp.bottom
         self.parentLeft = self.parent?.snp.left
@@ -79,30 +67,25 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     }
     @discardableResult public func from() -> KittenParentMethods{
         self.container = UIView()
-//        if let parent = self.parent{
-//            self.parentTop = parent.snp.top
-//            self.parentBottom = parent.snp.bottom
-//            self.parentLeft = parent.snp.left
-//            self.parentRight = parent.snp.right
-//        }
         return self
     }
-    @discardableResult public func parentTop(_ top : ConstraintItem) -> KittenParentMethods{
-        self.parentTop = top
-        return self
-    }
-    @discardableResult public func parentLeft(_ left : ConstraintItem) -> KittenParentMethods{
-        self.parentLeft = left
-        return self
-    }
-    @discardableResult public func parentBottom(_ bottom : ConstraintItem) -> KittenParentMethods{
-        self.parentBottom = bottom
-        return self
-    }
-    @discardableResult public func parentRight(_ right : ConstraintItem) -> KittenParentMethods{
-        self.parentRight = right
-        return self
-    }
+    //not public to edit now
+//    @discardableResult public func parentTop(_ top : ConstraintItem) -> KittenParentMethods{
+//        self.parentTop = top
+//        return self
+//    }
+//    @discardableResult public func parentLeft(_ left : ConstraintItem) -> KittenParentMethods{
+//        self.parentLeft = left
+//        return self
+//    }
+//    @discardableResult public func parentBottom(_ bottom : ConstraintItem) -> KittenParentMethods{
+//        self.parentBottom = bottom
+//        return self
+//    }
+//    @discardableResult public func parentRight(_ right : ConstraintItem) -> KittenParentMethods{
+//        self.parentRight = right
+//        return self
+//    }
     @discardableResult public func defaultAlignment(_ alignment : KittenAlignment) -> KittenParentMethods{
         self.defaultAlignment = alignment
         return self
@@ -245,7 +228,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return self
     }
     internal func preBuild() -> [KittenItem]{
-//        parent?.translatesAutoresizingMaskIntoConstraints = false
         return childs.filter({ (item) -> Bool in
             if let condition = item.insertCondition{
                 if !condition(){
@@ -266,6 +248,10 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                 subview.removeFromSuperview()
                 subview.snp.removeConstraints()
             }
+        }
+        if container?.superview != nil {
+            container?.removeFromSuperview()
+            container?.snp.removeConstraints()
         }
         return build()
     }
@@ -312,11 +298,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                         start.equalTo(lastEnd!).offset(child.itemOffset)
                     }
                     if (insertItems.last?.view == (child.view)){
-//                        if isAlignParentEnd{
-//                            end.equalTo(parentEnd!).offset(-endPadding)
-//                        }else{
-                            end.equalTo(parentEnd!).offset(-endPadding)
-//                        }
+                        end.equalTo(parentEnd!).offset(-endPadding)
                     }
                     KittenCommonMethod.updateSize(orientationLength, orientationChildSize)
                 }
@@ -326,15 +308,11 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                 }else{
                     child.view.setContentHuggingPriority(1000, for: orientation == .vertical ? .vertical : .horizontal)
                 }
-                
-                //todo : rethink if this feature appropriate
-//                if let ratio = child.ratio{
-//                    make.height.lessThanOrEqualTo((parent?.snp.width)!).multipliedBy(ratio)
-//                }
+
                 previousChild = child.view
             })
         }
-        if container?.superview == nil && parent != nil {
+        if parent != nil {
             parent?.addSubview(container!)
             if let parent = parent as? UIScrollView {
                 container?.snp.makeConstraints { (make) in
@@ -406,18 +384,4 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
             end.equalToSuperview().offset(-child.sideEndPadding)
         }
     }
-//    private func updateSize(_ extendable : ConstraintMakerExtendable, _ condition : KittenDimension?){
-//        if let condition = condition{
-//            if let value = condition.value{
-//                switch condition.condition {
-//                case .equal:
-//                    extendable.equalTo(value)
-//                case .max:
-//                    extendable.lessThanOrEqualTo(value)
-//                case .min:
-//                    extendable.greaterThanOrEqualTo(value)
-//                }
-//            }
-//        }
-//    }
 }

@@ -29,10 +29,10 @@ public protocol KittenParentMethods : KittenChild, KittenBuild{
     //true make the childs' container try to match its parent width(horizontal)/height(vertical)
     @discardableResult func isAlignDirectionEnd(_ isAlign : Bool) -> KittenParentMethods
     //swift only method, show that where the top/left/bottom/right of container
-    @discardableResult func parentTop(_ top : ConstraintItem) -> KittenParentMethods
-    @discardableResult func parentLeft(_ left : ConstraintItem) -> KittenParentMethods
-    @discardableResult func parentBottom(_ bottom : ConstraintItem) -> KittenParentMethods
-    @discardableResult func parentRight(_ right : ConstraintItem) -> KittenParentMethods
+//    @discardableResult func parentTop(_ top : ConstraintItem) -> KittenParentMethods
+//    @discardableResult func parentLeft(_ left : ConstraintItem) -> KittenParentMethods
+//    @discardableResult func parentBottom(_ bottom : ConstraintItem) -> KittenParentMethods
+//    @discardableResult func parentRight(_ right : ConstraintItem) -> KittenParentMethods
     //true will turn weight mode on, usually use with isAlignDirectionEnd, child's length based on their weight
     @discardableResult func weightMode(_ isOn : Bool) -> KittenParentMethods
 }

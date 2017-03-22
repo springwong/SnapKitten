@@ -21,11 +21,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-        testingBugs(virtualView: self)
-//        kitten = Kitten.create(.vertical).from(self)
-//            .isAlignDirectionEnd(true)
-//            .add(sv).fillParent() as? Kitten
-//            kitten?.rebuild()
+//        testingBugs(virtualView: self)
+        kitten = Kitten.create(.vertical).from(self)
+            .isAlignDirectionEnd(true)
+            .add(sv).fillParent() as? Kitten
+            kitten?.rebuild()
         
         
         let ivA = UIImageView()
@@ -83,20 +83,23 @@ class ViewController: UIViewController {
         Kitten.create(.horizontal).from(v1).defaultAlignment(.start)
             .allPadding(10)
             .add(lblA).build()
-        Kitten.create(.horizontal).from(v2).defaultAlignment(.center)
-            .add(lblB).add(lblD)
+        Kitten.create(.horizontal).from(v2).defaultAlignment(.parent)
+            .add(lblB).priority(.medium).add(lblD)
             .build()
         Kitten.create(.horizontal).from(v3).defaultAlignment(.parent)
             .allPadding(10)
             .add(lblC).build()
         
-        let view = Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
+        let view = Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(false)
             .add(v1).height(40, .equal)
             .add(v2)
             .add(buttonAlignRightCase())
             .add(v3).fillParent()
             .build()
         view.backgroundColor = UIColor.brown
+        
+//        v1.setContentCompressionResistancePriority(1, for: .vertical)
+//        v3.setContentCompressionResistancePriority(1000, for: .vertical)
     }
     
     override func viewDidAppear(_ animated: Bool) {
