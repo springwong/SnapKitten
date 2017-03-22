@@ -369,9 +369,9 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
             if isParentAlignmentExist {
                 container?.snp.makeConstraints({ (make) in
                     if orientation == .vertical {
-                        make.right.equalTo(parentBottom!)
+                        make.right.equalTo(parentRight!)
                     }else{
-                        make.bottom.equalTo(parentRight!)
+                        make.bottom.equalTo(parentBottom!)
                     }
                 })
             }
