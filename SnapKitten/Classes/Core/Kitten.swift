@@ -37,24 +37,24 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return Kitten(orientation)
     }
     @discardableResult public func from(_ parent : UIViewController) -> KittenParentMethods{
-        self.parent = parent.view
-        self.parentTop = parent.topLayoutGuide.snp.bottom
-        self.parentBottom = parent.bottomLayoutGuide.snp.top
-        self.parentLeft = parent.view.snp.left
-        self.parentRight = parent.view.snp.right
+//        self.parent = parent.view
+//        self.parentTop = parent.topLayoutGuide.snp.bottom
+//        self.parentBottom = parent.bottomLayoutGuide.snp.top
+//        self.parentLeft = parent.view.snp.left
+//        self.parentRight = parent.view.snp.right
         
-//        self.parent = IntrinicUIView()
-//        
-//        parent.view.addSubview(self.parent!)
-//        self.parent?.snp.makeConstraints({ (make) in
-//            make.top.equalTo(parent.topLayoutGuide.snp.bottom)
-//            make.bottom.lessThanOrEqualTo(parent.bottomLayoutGuide.snp.top)
-//            make.left.right.equalTo(parent.view)
-//        })
-//        self.parentTop = self.parent?.snp.top
-//        self.parentBottom = self.parent?.snp.bottom
-//        self.parentLeft = self.parent?.snp.left
-//        self.parentRight = self.parent?.snp.right
+        self.parent = IntrinicUIView()
+
+        parent.view.addSubview(self.parent!)
+        self.parent?.snp.makeConstraints({ (make) in
+            make.top.equalTo(parent.topLayoutGuide.snp.bottom)
+            make.bottom.lessThanOrEqualTo(parent.bottomLayoutGuide.snp.top)
+            make.left.right.equalTo(parent.view)
+        })
+        self.parentTop = self.parent?.snp.top
+        self.parentBottom = self.parent?.snp.bottom
+        self.parentLeft = self.parent?.snp.left
+        self.parentRight = self.parent?.snp.right
         return self
     }
     @discardableResult public func from(_ parent : UIScrollView) -> KittenParentMethods{
@@ -76,6 +76,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     }
     @discardableResult public func from() -> KittenParentMethods{
         self.parent = IntrinicUIView()
+        self.parent?.translatesAutoresizingMaskIntoConstraints = false
         if let parent = self.parent{
             self.parentTop = parent.snp.top
             self.parentBottom = parent.snp.bottom
@@ -287,7 +288,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                     orientation == .vertical ? make.left : make.top
                     , orientation == .vertical ? make.right : make.bottom
                     , orientation == .vertical ? make.centerX : make.centerY
-                    , child)
+                    , child, previousChild)
                 if isWeightMode{
                     if insertItems.first?.view == child.view{
                         start.equalTo(parentStart!).offset(startPadding)
@@ -349,7 +350,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
             child.view.setContentCompressionResistancePriority(1000, for: axis)
         }
     }
-    private func updateAlignment(_ start : ConstraintMakerExtendable, _ end : ConstraintMakerExtendable, _ center : ConstraintMakerExtendable, _ child : KittenItem){
+    private func updateAlignment(_ start : ConstraintMakerExtendable, _ end : ConstraintMakerExtendable, _ center : ConstraintMakerExtendable, _ child : KittenItem, _ previousChild : UIView?){
         switch child.alignment{
         case .start:
             start.equalToSuperview().offset(child.sideStartPadding)
@@ -358,7 +359,9 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
             start.greaterThanOrEqualToSuperview().offset(child.sideStartPadding)
             end.equalToSuperview().offset(-child.sideEndPadding)
         case .center:
-            center.equalToSuperview()
+            if let previousChild = previousChild {
+                center.equalTo(previousChild)
+            }
             start.greaterThanOrEqualToSuperview().offset(child.sideStartPadding)
             end.lessThanOrEqualToSuperview().offset(-child.sideEndPadding)
         case .parent:

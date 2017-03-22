@@ -21,12 +21,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-//        testingBugs(virtualView: self)
-        kitten = Kitten.create(.vertical).from(self)
-            .isAlignDirectionEnd(true)
-            .add(sv).fillParent() as? Kitten
-            
-            kitten?.rebuild()
+        testingBugs(virtualView: self)
+//        kitten = Kitten.create(.vertical).from(self)
+//            .isAlignDirectionEnd(true)
+//            .add(sv).fillParent() as? Kitten
+//            kitten?.rebuild()
         
         
         let ivA = UIImageView()
@@ -50,14 +49,14 @@ class ViewController: UIViewController {
         
         Kitten.create(KittenOrientation.vertical)
             .from(sv).isAlignDirectionEnd(false)
-            .add(cub).align(.start)
-            .add(itemVerticals()).height(300, .equal)
-            .add(priorityExample())
-            .add(alignLeftItems())
-            .add(anotherExample())
-            .addChilds(textViewA, textViewB)
             .add(buttonAlignRightCase())
-            .add(alignParentCard())
+//            .add(cub).align(.start)
+//            .add(itemVerticals()).height(300, .equal)
+//            .add(priorityExample())
+//            .add(alignLeftItems())
+//            .add(anotherExample())
+//            .addChilds(textViewA, textViewB)
+//            .add(alignParentCard())
             .build();
     }
     
@@ -81,22 +80,24 @@ class ViewController: UIViewController {
         v3.backgroundColor = UIColor.blue
         
         
-        Kitten.create(.vertical).from(v1).defaultAlignment(.start)
+        Kitten.create(.horizontal).from(v1).defaultAlignment(.start)
             .allPadding(10)
             .add(lblA).build()
-        Kitten.create(.vertical).from(v2)
+        Kitten.create(.horizontal).from(v2).defaultAlignment(.end)
             .add(lblB).add(lblD)
             .build()
-        Kitten.create(.vertical).from(v3)
+        Kitten.create(.horizontal).from(v3).defaultAlignment(.parent)
             .allPadding(10)
             .add(lblC).build()
         
-        Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
+        let view = Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
             .add(v1)
             .add(v2)
+            .add(buttonAlignRightCase())
             .add(v3).fillParent()
             .add(IntrinicUIView())
             .build()
+        view.backgroundColor = UIColor.brown
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -200,11 +201,13 @@ class ViewController: UIViewController {
         lbl.text = "123 "
         btn.backgroundColor = UIColor.red
         btn.setTitle("Testing Lenght of button", for: .normal)
-        return Kitten.create(.horizontal).from().startPadding(10).endPadding(10).defaultAlignment(.center)
-        .isAlignDirectionEnd(true)
-        .add(lbl).fillParent()
-        .add(btn)
-        .build()
+        let view = Kitten.create(.horizontal).from().startPadding(10).endPadding(10).defaultAlignment(.center)
+            .isAlignDirectionEnd(true)
+            .add(lbl).fillParent()
+            .add(btn)
+            .build()
+        view.backgroundColor = UIColor.green
+        return view
     }
     
     func itemVerticals() -> UIView{
