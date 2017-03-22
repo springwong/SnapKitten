@@ -314,7 +314,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         }
         if parent != nil {
             parent?.addSubview(container!)
-            if let parent = parent as? UIScrollView {
+            if let _ = parent as? UIScrollView {
                 container?.snp.makeConstraints { (make) in
                     switch orientation{
                     case .vertical:
