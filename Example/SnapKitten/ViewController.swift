@@ -50,21 +50,21 @@ class ViewController: UIViewController {
         Kitten.create(KittenOrientation.vertical)
             .from(sv).isAlignDirectionEnd(false)
             .add(buttonAlignRightCase())
-//            .add(cub).align(.start)
-//            .add(itemVerticals()).height(300, .equal)
-//            .add(priorityExample())
-//            .add(alignLeftItems())
-//            .add(anotherExample())
-//            .addChilds(textViewA, textViewB)
-//            .add(alignParentCard())
+            .add(cub).align(.start)
+            .add(itemVerticals()).height(300, .equal)
+            .add(priorityExample())
+            .add(alignLeftItems())
+            .add(anotherExample())
+            .addChilds(textViewA, textViewB)
+            .add(alignParentCard())
             .build();
     }
     
     func testingBugs(virtualView : UIViewController){
         
-        let v1 = IntrinicUIView()
-        let v2 = IntrinicUIView()
-        let v3 = IntrinicUIView()
+        let v1 = UIView()
+        let v2 = UIView()
+        let v3 = UIView()
         let lblA = UILabel()
         let lblB = UILabel()
         let lblC = UILabel()
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         Kitten.create(.horizontal).from(v1).defaultAlignment(.start)
             .allPadding(10)
             .add(lblA).build()
-        Kitten.create(.horizontal).from(v2).defaultAlignment(.end)
+        Kitten.create(.horizontal).from(v2).defaultAlignment(.center)
             .add(lblB).add(lblD)
             .build()
         Kitten.create(.horizontal).from(v3).defaultAlignment(.parent)
@@ -91,11 +91,10 @@ class ViewController: UIViewController {
             .add(lblC).build()
         
         let view = Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
-            .add(v1)
+            .add(v1).height(40, .equal)
             .add(v2)
             .add(buttonAlignRightCase())
             .add(v3).fillParent()
-            .add(IntrinicUIView())
             .build()
         view.backgroundColor = UIColor.brown
     }
