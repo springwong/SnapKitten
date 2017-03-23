@@ -21,12 +21,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-        testingBugs(virtualView: self.view)
-//        kitten = Kitten.create(.vertical).from(self)
-//            .isAlignDirectionEnd(true)
-//            .add(sv) as? Kitten
-//            
-//            kitten?.rebuild()
+        
+        kitten = Kitten.create(.vertical).from(self)
+            .isAlignDirectionEnd(true)
+            .add(sv) as? Kitten
+        
+//        testingBugs(virtualView: self.view)
+            kitten?.rebuild()
         
         
         let ivA = UIImageView()
@@ -66,9 +67,9 @@ class ViewController: UIViewController {
     }
     
     func testingBugs(virtualView : UIView){
-        let v1 = UIView()
-        let v2 = UIView()
-        let v3 = UIView()
+        let v1 = IntrinicUIView()
+        let v2 = IntrinicUIView()
+        let v3 = IntrinicUIView()
         let lblA = UILabel()
         let lblB = UILabel()
         let lblC = UILabel()
@@ -93,7 +94,7 @@ class ViewController: UIViewController {
             .allPadding(10)
             .add(lblC).build()
         
-        Kitten.create(.vertical).from(virtualView)
+        Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
             .add(v1)//.height(100, .max)
             .add(v2).fillParent()
             .add(v3)

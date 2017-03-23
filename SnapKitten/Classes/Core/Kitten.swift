@@ -245,11 +245,20 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     }
     
     @discardableResult public func rebuild() -> UIView{
+        if let parent = parent {
+            for subview in parent.subviews {
+                if(!NSStringFromClass(type(of: subview)).contains("_UILayoutGuide")){
+                    subview.snp.removeConstraints()
+                    subview.removeFromSuperview()
+                }
+            }
+        }
         if let container = container {
             for subview in (container.subviews){
                 if(!NSStringFromClass(type(of: subview)).contains("_UILayoutGuide")){
-                    subview.removeFromSuperview()
                     subview.snp.removeConstraints()
+                    container.invalidateIntrinsicContentSize()
+                    subview.removeFromSuperview()
                 }
             }
         }
@@ -265,7 +274,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return build()
     }
     private func mixBuild() -> UIView{
-        let view = UIView()
+        let view = IntrinicUIView()
         if container == nil {
             container = view
             parentTop = container?.snp.top
