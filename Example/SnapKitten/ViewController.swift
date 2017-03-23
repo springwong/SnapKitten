@@ -21,11 +21,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-//        testingBugs(virtualView: self)
-        kitten = Kitten.create(.vertical).from(self)
-            .isAlignDirectionEnd(true)
-            .add(sv).fillParent() as? Kitten
-            kitten?.rebuild()
+        testingBugs(virtualView: self.view)
+//        kitten = Kitten.create(.vertical).from(self)
+//            .isAlignDirectionEnd(true)
+//            .add(sv) as? Kitten
+//            
+//            kitten?.rebuild()
         
         
         let ivA = UIImageView()
@@ -49,8 +50,6 @@ class ViewController: UIViewController {
         
         Kitten.create(KittenOrientation.vertical)
             .from(sv).isAlignDirectionEnd(false)
-            .add(weightWithCenter())
-            .add(buttonAlignRightCase())
             .add(cub).align(.start)
             .add(itemVerticals()).height(300, .equal)
             .add(priorityExample())
@@ -58,11 +57,15 @@ class ViewController: UIViewController {
             .add(anotherExample())
             .addChilds(textViewA, textViewB)
             .add(alignParentCard())
+            .add(buttonAlignRightCase())
             .build();
+//
+//        sv.attachContentView(contentView: mainView, scrollOrientation: .vertical)
+        
+        
     }
     
-    func testingBugs(virtualView : UIViewController){
-        
+    func testingBugs(virtualView : UIView){
         let v1 = UIView()
         let v2 = UIView()
         let v3 = UIView()
@@ -71,36 +74,30 @@ class ViewController: UIViewController {
         let lblC = UILabel()
         let lblD = UILabel()
         lblB.numberOfLines = 0
-        lblA.text = "Hellv ermopvjeroveorv eoprj voper opermvop emropvmeropv meropvmerpomv peormv poer meoprmo"
-        lblB.text = "!! gberi beribv ierbviernv ioer kneon voewn owvowovnweo nweov woehi bijbeiv bwei vbwibvweibv weibiwebweibi gkeorpgj erpj "
+        lblA.text = "Hello"
+        lblB.text = "!! gberi beribv ierbviernv ioernviorv ioerniovnerioreio nrv ierbiuehiuvb euieurv ueve h"
         lblC.text = "World"
         lblD.text = "testing"
         
         v1.backgroundColor = UIColor.red
         v2.backgroundColor = UIColor.green
         v3.backgroundColor = UIColor.blue
-        
-        
-        Kitten.create(.horizontal).from(v1).defaultAlignment(.start)
+
+        Kitten.create(.vertical).from(v1).defaultAlignment(.start)
             .allPadding(10)
             .add(lblA).build()
-        Kitten.create(.horizontal).from(v2).defaultAlignment(.parent)
-            .add(lblB).priority(.medium).add(lblD)
+        Kitten.create(.vertical).from(v2)
+            .add(lblB).add(lblD)
             .build()
-        Kitten.create(.horizontal).from(v3).defaultAlignment(.parent)
+        Kitten.create(.vertical).from(v3)
             .allPadding(10)
             .add(lblC).build()
         
-        let view = Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(false)
-            .add(v1)//.height(40, .equal)
-            .add(v2)
-            .add(buttonAlignRightCase())
-            .add(v3).fillParent()
+        Kitten.create(.vertical).from(virtualView)
+            .add(v1)//.height(100, .max)
+            .add(v2).fillParent()
+            .add(v3)
             .build()
-        view.backgroundColor = UIColor.brown
-        
-//        v1.setContentCompressionResistancePriority(1, for: .vertical)
-//        v3.setContentCompressionResistancePriority(1000, for: .vertical)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -192,7 +189,7 @@ class ViewController: UIViewController {
         
         return Kitten.create(.horizontal).from()
             .weightMode(true).itemDefaultOffset(10).startPadding(20).endPadding(20)
-            .add(viewA).weight(3).height(40, .equal)
+            .add(viewA).weight(3)
             .add(viewB).weight(2)
             .add(viewC).weight(1)
             .build()
@@ -204,13 +201,11 @@ class ViewController: UIViewController {
         lbl.text = "123 "
         btn.backgroundColor = UIColor.red
         btn.setTitle("Testing Lenght of button", for: .normal)
-        let view = Kitten.create(.horizontal).from().startPadding(10).endPadding(10).defaultAlignment(.center)
-            .isAlignDirectionEnd(true)
-            .add(lbl).fillParent()
-            .add(btn)
-            .build()
-        view.backgroundColor = UIColor.green
-        return view
+        return Kitten.create(.horizontal).from().startPadding(10).endPadding(10)
+        .isAlignDirectionEnd(true)
+        .add(lbl).fillParent()
+        .add(btn)
+        .build()
     }
     
     func itemVerticals() -> UIView{
@@ -239,24 +234,9 @@ class ViewController: UIViewController {
         return container
     }
     func btnOnClick(){
-        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
-        self.present(nv, animated: true, completion: nil)
-//        kitten?.rebuild()
-    }
-    
-    func weightWithCenter() -> UIView{
-        let kitten = Kitten.create(.horizontal).from().weightMode(true) as! Kitten
-        for _ in 0..<3 {
-            let view = UIView()
-            kitten.add(view).weight(1)
-            
-            let textView = UILabel()
-            textView.text = "Center"
-            Kitten.create(.vertical).from(view).defaultAlignment(.center)
-            .add(textView)
-            .build()
-        }
-        return kitten.build()
+//        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
+//        self.present(nv, animated: true, completion: nil)
+        kitten?.rebuild()
     }
 
     override func didReceiveMemoryWarning() {
