@@ -26,8 +26,8 @@ class ViewController: UIViewController {
             .isAlignDirectionEnd(true)
             .add(sv) as? Kitten
         
-//        testingBugs(virtualView: self.view)
-            kitten?.rebuild()
+        testingBugs(virtualView: self.view)
+//            kitten?.rebuild()
         
         
         let ivA = UIImageView()
@@ -67,9 +67,6 @@ class ViewController: UIViewController {
     }
     
     func testingBugs(virtualView : UIView){
-        let v1 = IntrinicUIView()
-        let v2 = IntrinicUIView()
-        let v3 = IntrinicUIView()
         let lblA = UILabel()
         let lblB = UILabel()
         let lblC = UILabel()
@@ -79,25 +76,25 @@ class ViewController: UIViewController {
         lblB.text = "!! gberi beribv ierbviernv ioernviorv ioerniovnerioreio nrv ierbiuehiuvb euieurv ueve h"
         lblC.text = "World"
         lblD.text = "testing"
+
+        let v1 = Kitten.create(.vertical).from().defaultAlignment(.start)
+            .allPadding(10)
+            .add(lblA).build()
+        let v2 = Kitten.create(.vertical).from()
+            .add(lblB).add(lblD)
+            .build()
+        let v3 = Kitten.create(.vertical).from()
+            .allPadding(10)
+            .add(lblC).build()
         
         v1.backgroundColor = UIColor.red
         v2.backgroundColor = UIColor.green
         v3.backgroundColor = UIColor.blue
-
-        Kitten.create(.vertical).from(v1).defaultAlignment(.start)
-            .allPadding(10)
-            .add(lblA).build()
-        Kitten.create(.vertical).from(v2)
-            .add(lblB).add(lblD)
-            .build()
-        Kitten.create(.vertical).from(v3)
-            .allPadding(10)
-            .add(lblC).build()
         
         Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
             .add(v1)//.height(100, .max)
-            .add(v2).fillParent()
-            .add(v3)
+            .add(v2)//.fillParent()
+            .add(v3).fillParent()
             .build()
     }
     
