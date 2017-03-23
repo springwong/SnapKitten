@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, KittenBuild{
-    internal var parent : UIView?
+    internal weak var parent : UIView?
     internal var container : UIView?
     internal var parentTop : ConstraintItem?
     internal var parentBottom : ConstraintItem?
@@ -377,6 +377,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
             if let previousChild = previousChild {
                 center.equalTo(previousChild)
             }
+            center.equalToSuperview().priority(500)
             start.greaterThanOrEqualToSuperview().offset(child.sideStartPadding)
             end.lessThanOrEqualToSuperview().offset(-child.sideEndPadding)
         case .parent:

@@ -49,6 +49,7 @@ class ViewController: UIViewController {
         
         Kitten.create(KittenOrientation.vertical)
             .from(sv).isAlignDirectionEnd(false)
+            .add(weightWithCenter())
             .add(buttonAlignRightCase())
             .add(cub).align(.start)
             .add(itemVerticals()).height(300, .equal)
@@ -91,7 +92,7 @@ class ViewController: UIViewController {
             .add(lblC).build()
         
         let view = Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(false)
-            .add(v1).height(40, .equal)
+            .add(v1)//.height(40, .equal)
             .add(v2)
             .add(buttonAlignRightCase())
             .add(v3).fillParent()
@@ -241,6 +242,21 @@ class ViewController: UIViewController {
         let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
         self.present(nv, animated: true, completion: nil)
 //        kitten?.rebuild()
+    }
+    
+    func weightWithCenter() -> UIView{
+        let kitten = Kitten.create(.horizontal).from().weightMode(true) as! Kitten
+        for _ in 0..<3 {
+            let view = UIView()
+            kitten.add(view).weight(1)
+            
+            let textView = UILabel()
+            textView.text = "Center"
+            Kitten.create(.vertical).from(view).defaultAlignment(.center)
+            .add(textView)
+            .build()
+        }
+        return kitten.build()
     }
 
     override func didReceiveMemoryWarning() {
