@@ -27,39 +27,39 @@ class ViewController: UIViewController {
 //            .add(sv) as? Kitten
 //            
 //            kitten?.rebuild()
-//        
-//        
-//        let ivA = UIImageView()
-//        ivA.backgroundColor = UIColor.red
-//        
-//        let ivB = UIImageView()
-//        ivB.backgroundColor = UIColor.blue
+        
+        
+        let ivA = UIImageView()
+        ivA.backgroundColor = UIColor.red
+        
+        let ivB = UIImageView()
+        ivB.backgroundColor = UIColor.blue
+
+        let lblA = UILabel()
+        lblA.numberOfLines = 0
+        lblA.textColor = UIColor.white
+        lblA.text = "wekj voweijvew voiew voiwehoiewhvoiweh voiwehwehoiwehvi hweipv hweiuvbweiuvbweiuvbew iubewiu "
+        
+        let cub = Cub.create().from()
+            .add(ivA).size(40, .equal).offset(10)
+            .add(ivB).size(20, .equal).alignRight(ivA).alignParentBottom().rightOffset(-10)
+            //.centerY(true).size(80, .equal)//.alignParentLeft()
+//            .add(lblA).rightOf(ivA).alignParentTop().topOffset(0)
+            .build()
+        cub.backgroundColor = UIColor.black
+        
+        Kitten.create(KittenOrientation.vertical)
+            .from(sv).isAlignDirectionEnd(false)
+            .add(cub).align(.start)
+            .add(itemVerticals()).height(300, .equal)
+            .add(priorityExample())
+            .add(alignLeftItems())
+            .add(anotherExample())
+            .addChilds(textViewA, textViewB)
+            .add(alignParentCard())
+            .add(buttonAlignRightCase())
+            .build();
 //
-//        let lblA = UILabel()
-//        lblA.numberOfLines = 0
-//        lblA.textColor = UIColor.white
-//        lblA.text = "wekj voweijvew voiew voiwehoiewhvoiweh voiwehwehoiwehvi hweipv hweiuvbweiuvbweiuvbew iubewiu "
-//        
-//        let cub = Cub.create().from()
-//            .add(ivA).size(40, .equal).offset(10)
-//            .add(ivB).size(20, .equal).alignRight(ivA).alignParentBottom().rightOffset(-10)
-//            //.centerY(true).size(80, .equal)//.alignParentLeft()
-////            .add(lblA).rightOf(ivA).alignParentTop().topOffset(0)
-//            .build()
-//        cub.backgroundColor = UIColor.black
-//        
-//        Kitten.create(KittenOrientation.vertical)
-//            .from(mainView).isAlignDirectionEnd(false)
-//            .add(cub).align(.start)
-//            .add(itemVerticals()).height(300, .equal)
-//            .add(priorityExample())
-//            .add(alignLeftItems())
-//            .add(anotherExample())
-//            .addChilds(textViewA, textViewB)
-//            .add(alignParentCard())
-//            .add(buttonAlignRightCase())
-//            .build();
-//        
 //        sv.attachContentView(contentView: mainView, scrollOrientation: .vertical)
         
         
@@ -94,8 +94,8 @@ class ViewController: UIViewController {
             .add(lblC).build()
         
         Kitten.create(.vertical).from(virtualView)
-            .add(v1)
-            .add(v2)
+            .add(v1)//.height(100, .max)
+            .add(v2).fillParent()
             .add(v3)
             .build()
     }

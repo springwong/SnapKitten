@@ -10,7 +10,8 @@ import UIKit
 import SnapKit
 
 public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, KittenBuild{
-    internal var parent : UIView?
+    internal weak var container : UIView?
+    internal weak var parent : UIView?
     internal var parentTop : ConstraintItem?
     internal var parentBottom : ConstraintItem?
     internal var parentLeft : ConstraintItem?
@@ -37,7 +38,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return Kitten(orientation)
     }
     @discardableResult public func from(_ parent : UIViewController) -> KittenParentMethods{
-        self.parent = parent.view
+        self.container = parent.view
         self.parentTop = parent.topLayoutGuide.snp.bottom
         self.parentBottom = parent.bottomLayoutGuide.snp.top
         self.parentLeft = parent.view.snp.left
@@ -45,16 +46,17 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return self
     }
     @discardableResult public func from(_ parent : UIScrollView) -> KittenParentMethods{
-        self.parent = UIView()
-        parent.attachContentView(contentView : self.parent!, scrollOrientation : self.orientation)
-        self.parentTop = self.parent?.snp.top
-        self.parentBottom = self.parent?.snp.bottom
-        self.parentLeft = self.parent?.snp.left
-        self.parentRight = self.parent?.snp.right
+        self.parent = parent
+//        self.parent = UIView()
+//        parent.attachContentView(contentView : self.parent!, scrollOrientation : self.orientation)
+//        self.parentTop = self.parent?.snp.top
+//        self.parentBottom = self.parent?.snp.bottom
+//        self.parentLeft = self.parent?.snp.left
+//        self.parentRight = self.parent?.snp.right
         return self
     }
     @discardableResult public func from(_ parent : UIView) -> KittenParentMethods{
-        self.parent = parent
+        self.container = parent
         self.parentTop = parent.snp.top
         self.parentBottom = parent.snp.bottom
         self.parentLeft = parent.snp.left
@@ -62,13 +64,13 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return self
     }
     @discardableResult public func from() -> KittenParentMethods{
-        self.parent = UIView()
-        if let parent = self.parent{
-            self.parentTop = parent.snp.top
-            self.parentBottom = parent.snp.bottom
-            self.parentLeft = parent.snp.left
-            self.parentRight = parent.snp.right
-        }
+//        self.parent = UIView()
+//        if let parent = self.parent{
+//            self.parentTop = parent.snp.top
+//            self.parentBottom = parent.snp.bottom
+//            self.parentLeft = parent.snp.left
+//            self.parentRight = parent.snp.right
+//        }
         return self
     }
     @discardableResult public func parentTop(_ top : ConstraintItem) -> KittenParentMethods{
@@ -229,7 +231,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return self
     }
     internal func preBuild() -> [KittenItem]{
-//        parent?.translatesAutoresizingMaskIntoConstraints = false
         return childs.filter({ (item) -> Bool in
             if let condition = item.insertCondition{
                 if !condition(){
@@ -240,25 +241,43 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         })
     }
     @discardableResult public func build() -> UIView{
-        mixBuild()
-        return parent!
+        return mixBuild()
     }
     
     @discardableResult public func rebuild() -> UIView{
-        for subview in (parent?.subviews)!{
-            if(!NSStringFromClass(type(of: subview)).contains("_UILayoutGuide")){
-                subview.removeFromSuperview()
-                subview.snp.removeConstraints()
+        if let container = container {
+            for subview in (container.subviews){
+                if(!NSStringFromClass(type(of: subview)).contains("_UILayoutGuide")){
+                    subview.removeFromSuperview()
+                    subview.snp.removeConstraints()
+                }
             }
         }
+//        if let parent = parent {
+//            for subview in (parent?.subviews)!{
+//                if(!NSStringFromClass(type(of: subview)).contains("_UILayoutGuide")){
+//                    subview.removeFromSuperview()
+//                    subview.snp.removeConstraints()
+//                }
+//            }
+//        }
+        
         return build()
     }
-    private func mixBuild(){
+    private func mixBuild() -> UIView{
+        let view = UIView()
+        if container == nil {
+            container = view
+            parentTop = container?.snp.top
+            parentBottom = container?.snp.bottom
+            parentLeft = container?.snp.left
+            parentRight = container?.snp.right
+        }
         let insertItems = preBuild()
         var previousChild : UIView?
         let totalWeight : Float? = childs.first?.weight
         insertItems.forEach { (child) in
-            parent?.addSubview(child.view)
+            container?.addSubview(child.view)
             child.view.snp.makeConstraints({ (make) in
                 let start = orientation == .vertical ? make.top : make.left
                 let end = orientation == .vertical ? make.bottom : make.right
@@ -314,6 +333,25 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                 previousChild = child.view
             })
         }
+        //if parent exist and it's scrollview, add container to scrollview
+        if let parent = parent as? UIScrollView {
+            if container?.superview == nil {
+                parent.addSubview(container!)
+                container?.snp.makeConstraints { (make) in
+                    switch orientation{
+                    case .vertical:
+                        make.width.equalToSuperview()
+                        make.left.right.equalToSuperview()
+                        make.top.bottom.equalToSuperview()
+                    case .horizontal:
+                        make.height.equalToSuperview()
+                        make.top.bottom.equalToSuperview()
+                        make.left.right.equalToSuperview()
+                    }
+                }
+            }
+        }
+        return container!
     }
     private func updateCompressionResistance(_ axis : UILayoutConstraintAxis, _ child : KittenItem){
         switch child.priority {
@@ -342,18 +380,4 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
             end.equalToSuperview().offset(-child.sideEndPadding)
         }
     }
-//    private func updateSize(_ extendable : ConstraintMakerExtendable, _ condition : KittenDimension?){
-//        if let condition = condition{
-//            if let value = condition.value{
-//                switch condition.condition {
-//                case .equal:
-//                    extendable.equalTo(value)
-//                case .max:
-//                    extendable.lessThanOrEqualTo(value)
-//                case .min:
-//                    extendable.greaterThanOrEqualTo(value)
-//                }
-//            }
-//        }
-//    }
 }
