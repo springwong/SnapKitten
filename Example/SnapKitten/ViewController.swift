@@ -26,8 +26,8 @@ class ViewController: UIViewController {
             .isAlignDirectionEnd(true)
             .add(sv) as? Kitten
         
-//        testingBugs(virtualView: self.view)
-            kitten?.rebuild()
+        testingBugs(virtualView: self.view)
+//            kitten?.rebuild()
         
         
         let ivA = UIImageView()
@@ -78,11 +78,12 @@ class ViewController: UIViewController {
         lblC.text = "World"
         lblD.text = "testing"
 
-        let v1 = Kitten.create(.vertical).from().defaultAlignment(.start)
+        let v1 = Kitten.create(.horizontal).from().defaultAlignment(.start)
             .allPadding(10)
             .add(lblA).build()
-        let v2 = Kitten.create(.vertical).from()
-            .add(lblB).add(lblD)
+        let v2 = Kitten.create(.vertical).from().endPadding(20)
+            .add(lblB).align(.start).sideEndPadding(150)
+            .add(lblD)
             .build()
         let v3 = Kitten.create(.vertical).from()
             .allPadding(10)
@@ -92,8 +93,8 @@ class ViewController: UIViewController {
         v2.backgroundColor = UIColor.green
         v3.backgroundColor = UIColor.blue
         
-        Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
-            .add(v1)//.height(100, .max)
+        Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true).startPadding(50).endPadding(100)
+            .add(v1).height(100, .max)
             .add(v2)//.fillParent()
             .add(v3).fillParent()
             .build()

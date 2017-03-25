@@ -14,11 +14,11 @@ public class IntrinicUIView: UIView {
         var maxWidth :CGFloat = 0
         var maxHeight :CGFloat = 0
         for subview in self.subviews {
-            let width : CGFloat = subview.intrinsicContentSize.width + subview.frame.origin.x
+            let width : CGFloat = subview.intrinsicContentSize.width + self.frame.size.width - subview.frame.size.width
             if width > maxWidth {
                 maxWidth = width
             }
-            let height : CGFloat = subview.intrinsicContentSize.height + subview.frame.origin.y
+            let height : CGFloat = subview.intrinsicContentSize.height + self.frame.size.height - subview.frame.size.height
             if height > maxHeight {
                 maxHeight = height
             }
