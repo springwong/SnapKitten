@@ -26,8 +26,8 @@ class ViewController: UIViewController {
             .isAlignDirectionEnd(true)
             .add(sv) as? Kitten
         
-        testingBugs(virtualView: self.view)
-//            kitten?.rebuild()
+//        testingBugs(virtualView: self.view)
+            kitten?.rebuild()
         
         
         let ivA = UIImageView()
@@ -52,6 +52,7 @@ class ViewController: UIViewController {
         Kitten.create(KittenOrientation.vertical)
             .from(sv).isAlignDirectionEnd(false)
             .add(cub).align(.start)
+            .add(fillParentExample()).align(.center)
             .add(itemVerticals()).height(300, .equal)
             .add(priorityExample())
             .add(alignLeftItems())
@@ -235,6 +236,23 @@ class ViewController: UIViewController {
 //        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
 //        self.present(nv, animated: true, completion: nil)
         kitten?.rebuild()
+    }
+    
+    func fillParentExample() -> UIView{
+        let lblA = UILabel()
+        let lblB = UILabel()
+        let lblC = UILabel()
+        lblA.text = "viewA";
+        lblB.text = "viewB svsdnlvsdlkvlkvnklvnewlk nkernreklnvelrn lrenlre nlrenler lk ";
+        lblC.text = "viewC";
+        lblA.backgroundColor = UIColor.red
+        lblB.backgroundColor = UIColor.green
+        lblC.backgroundColor = UIColor.blue
+        return Kitten.create(.horizontal).from()//.isAlignDirectionEnd(true)
+        .add(lblA)
+        .add(lblB).fillParent()
+        .add(lblC).priority(.low)
+        .build()
     }
 
     override func didReceiveMemoryWarning() {
