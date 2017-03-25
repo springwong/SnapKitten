@@ -293,7 +293,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     private func mixBuild() -> UIView{
         var view : UIView?
         if container == nil {
-            if let parent = parent as? UIScrollView {
+            if let _ = parent as? UIScrollView {
                 view = UIView()
             }else{
                 view = IntrinicUIView()
