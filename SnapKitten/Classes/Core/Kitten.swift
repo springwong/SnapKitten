@@ -47,12 +47,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     }
     @discardableResult public func from(_ parent : UIScrollView) -> KittenParentMethods{
         self.parent = parent
-//        self.parent = UIView()
-//        parent.attachContentView(contentView : self.parent!, scrollOrientation : self.orientation)
-//        self.parentTop = self.parent?.snp.top
-//        self.parentBottom = self.parent?.snp.bottom
-//        self.parentLeft = self.parent?.snp.left
-//        self.parentRight = self.parent?.snp.right
         return self
     }
     @discardableResult public func from(_ parent : UIView) -> KittenParentMethods{
@@ -64,13 +58,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return self
     }
     @discardableResult public func from() -> KittenParentMethods{
-//        self.parent = UIView()
-//        if let parent = self.parent{
-//            self.parentTop = parent.snp.top
-//            self.parentBottom = parent.snp.bottom
-//            self.parentLeft = parent.snp.left
-//            self.parentRight = parent.snp.right
-//        }
         return self
     }
     @discardableResult public func parentTop(_ top : ConstraintItem) -> KittenParentMethods{
@@ -254,15 +241,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                 }
             }
         }
-//        if let parent = parent {
-//            for subview in (parent?.subviews)!{
-//                if(!NSStringFromClass(type(of: subview)).contains("_UILayoutGuide")){
-//                    subview.removeFromSuperview()
-//                    subview.snp.removeConstraints()
-//                }
-//            }
-//        }
-        
         return build()
     }
     private func mixBuild() -> UIView{
