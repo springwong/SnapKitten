@@ -37,6 +37,12 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     @discardableResult static public func create(_ orientation : KittenOrientation) -> KittenParent{
         return Kitten(orientation)
     }
+    @discardableResult static public func horizontal() -> KittenParent {
+        return Kitten(.horizontal)
+    }
+    @discardableResult static public func vertical() -> KittenParent {
+        return Kitten(.vertical)
+    }
     @discardableResult public func from(_ parent : UIViewController) -> KittenParentMethods{
         self.container = parent.view
         self.parentTop = parent.topLayoutGuide.snp.bottom
@@ -192,12 +198,41 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.currentChild?.alignment = alignment
         return self
     }
+    @discardableResult public func alignSideStart() -> KittenChildMethods {
+        self.currentChild?.alignment = .start
+        return self
+    }
+    @discardableResult public func alignSideEnd() -> KittenChildMethods {
+        self.currentChild?.alignment = .end
+        return self
+    }
+    @discardableResult public func alignSideCenter() -> KittenChildMethods {
+        self.currentChild?.alignment = .center
+        return self
+    }
+    @discardableResult public func alignSideParent() -> KittenChildMethods {
+        self.currentChild?.alignment = .parent
+        return self
+    }
     @discardableResult public func condition(_ condition : @escaping KittenInsertCondition) -> KittenChildMethods{
         self.currentChild?.insertCondition = condition
         return self
     }
     @discardableResult public func width(_ value : Int?, _ condition : KittenSign = .equal) -> KittenChildMethods{
         self.currentChild?.width = KittenDimension(value: value, condition: condition)
+        return self
+    }
+    @discardableResult public func width(_ value : Int?) -> KittenChildMethods {
+        self.currentChild?.width = KittenDimension(value: value, condition: .equal)
+        return self
+    }
+    @discardableResult public func height(_ value : Int?) -> KittenChildMethods {
+        self.currentChild?.height = KittenDimension(value: value, condition: .equal)
+        return self
+    }
+    @discardableResult public func size(_ value : Int?) -> KittenChildMethods {
+        self.currentChild?.width = KittenDimension(value: value, condition: .equal)
+        self.currentChild?.height = KittenDimension(value: value, condition: .equal)
         return self
     }
     @discardableResult public func height(_ value : Int?, _ condition : KittenSign = .equal) -> KittenChildMethods{
@@ -211,6 +246,18 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     }
     @discardableResult public func priority(_ priority : KittenPriority) -> KittenChildMethods{
         self.currentChild?.priority = priority
+        return self
+    }
+    @discardableResult public func importanceHigh() -> KittenChildMethods {
+        self.currentChild?.priority = .high
+        return self
+    }
+    @discardableResult public func importanceMedium() -> KittenChildMethods {
+        self.currentChild?.priority = .medium
+        return self
+    }
+    @discardableResult public func importanceLow() -> KittenChildMethods {
+        self.currentChild?.priority = .low
         return self
     }
     @discardableResult public func weight(_ value : Float) -> KittenChildMethods{
