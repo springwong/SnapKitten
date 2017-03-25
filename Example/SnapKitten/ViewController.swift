@@ -26,8 +26,8 @@ class ViewController: UIViewController {
             .isAlignDirectionEnd(true)
             .add(sv) as? Kitten
         
-        testingBugs(virtualView: self.view)
-//            kitten?.rebuild()
+//        testingBugs(virtualView: self.view)
+            kitten?.rebuild()
         
         
         let ivA = UIImageView()
@@ -61,10 +61,6 @@ class ViewController: UIViewController {
             .add(alignParentCard())
             .add(buttonAlignRightCase())
             .build();
-//
-//        sv.attachContentView(contentView: mainView, scrollOrientation: .vertical)
-        
-        
     }
     
     func testingBugs(virtualView : UIView){
@@ -94,7 +90,7 @@ class ViewController: UIViewController {
         v3.backgroundColor = UIColor.blue
         
         Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true).startPadding(50).endPadding(100)
-            .add(v1).height(100, .max)
+            .add(v1)//.height(100, .max)
             .add(v2)//.fillParent()
             .add(v3).fillParent()
             .build()
