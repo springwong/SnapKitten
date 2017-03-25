@@ -49,11 +49,11 @@ class ViewController: UIViewController {
             .build()
         cub.backgroundColor = UIColor.black
         
-        Kitten.create(KittenOrientation.vertical)
+        Kitten.vertical()
             .from(sv).isAlignDirectionEnd(false)
             .add(cub).align(.start)
-            .add(fillParentExample()).align(.center)
-            .add(itemVerticals()).height(300, .equal)
+            .add(fillParentExample()).alignSideCenter()
+            .add(itemVerticals()).height(300)
             .add(priorityExample())
             .add(alignLeftItems())
             .add(anotherExample())
@@ -248,7 +248,7 @@ class ViewController: UIViewController {
         return Kitten.create(.horizontal).from()//.isAlignDirectionEnd(true)
         .add(lblA)
         .add(lblB).fillParent()
-        .add(lblC).priority(.low)
+        .add(lblC).importanceHigh()
         .build()
     }
 
