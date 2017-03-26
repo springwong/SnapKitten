@@ -128,7 +128,7 @@ rebuild() // remove subviews before build()
 
 ### Advance Usage
 
-### Kitten Object as variable
+#### Kitten Object as variable
 Kitten methods always return "Protocol" but you can always force cast to Kitten object
 ```ruby
 	let kitten : Kitten = Kitten.horizonta() as! Kitten
@@ -151,6 +151,36 @@ Kitten provides a condition method to allow the control of child insertion
 .rebuild()
 ```
 ![](website/static/conditionSample.png)
+
+#### Test your code in iOS Playground
+You can always visualize test your code in iOS Playground
+To open visual playground, Click "View > Assistant Editor > Show Assisant Editor" in Xcode
+```ruby
+import UIKit
+import SnapKitten
+import PlaygroundSupport
+
+let virtualView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+virtualView.backgroundColor = UIColor.gray
+PlaygroundPage.current.liveView = virtualView
+
+let iv = UIImageView()
+iv.backgroundColor = UIColor.red
+let lblA = UILabel()
+lblA.text = "Hello World"
+lblA.backgroundColor = UIColor.blue
+
+let simpleComponent = Kitten.horizontal().from()
+.add(iv).size(40)
+.add(lblA).itemOffset(10)
+.build()
+simpleComponent.backgroundColor = UIColor.green
+
+Kitten.create(.vertical).from(virtualView)
+    .add(simpleComponent).align(.start)
+    .build()
+```
+![](website/static/playground.png)
 
 ## Requirements
 - iOS 8.0+
