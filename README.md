@@ -2,7 +2,6 @@
 
 SnapKitten is a Linear Layout Solution Library based on SnapKit and Auto Layout.
 
-[![CI Status](http://img.shields.io/travis/Spring Wong/SnapKitten.svg?style=flat)](https://travis-ci.org/Spring Wong/SnapKitten)
 [![Version](https://img.shields.io/cocoapods/v/SnapKitten.svg?style=flat)](http://cocoapods.org/pods/SnapKitten)
 [![License](https://img.shields.io/cocoapods/l/SnapKitten.svg?style=flat)](http://cocoapods.org/pods/SnapKitten)
 [![Platform](https://img.shields.io/cocoapods/p/SnapKitten.svg?style=flat)](http://cocoapods.org/pods/SnapKitten)
@@ -140,7 +139,7 @@ pod "SnapKitten"
 
 ## Author
 
-Spring Wong, rudolphwong2002@gmail.com
+Spring, development.spring@gmail.com
 
 ## License
 
