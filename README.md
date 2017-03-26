@@ -22,7 +22,7 @@ let virtualView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
 virtualView.backgroundColor = UIColor.gray
 PlaygroundPage.current.liveView = virtualView
 
-//some init UI Coding
+// ... some init UI Code
 
 let simpleComponent = Kitten.horizontal().from()
 .add(iv).size(40)
@@ -36,6 +36,7 @@ let threeComponentExample = Kitten.horizontal()
 .add(lbl2).fillParent()
 .add(iv3).size(60)
 .build()
+threeComponentExample.backgroundColor = UIColor.orange
 
 Kitten.create(.vertical).from(virtualView)
     .add(simpleComponent).align(.start)
@@ -45,42 +46,84 @@ Kitten.create(.vertical).from(virtualView)
 Result:
 ![](website/static/simpleComponent.png)
 
-### How do use Kitten class?
+### So, What's Kitten (SnapKitten) Library?
 
-Kitten class is a assistant library to break down complex UI component to simple linear design.
-Kitten always think layout as top to bottom (vertical) or left to right (horizontal)
-By handle constraint system, it achieve android linear layout like behaviour
+Kitten is a constraint relation building library under SnapKitten and iOS Constraint system.
+Kitten build the constraint relation between views and result in a Android LinearLayout-Like behaviour.
 
+Kitten simplify the complex constraint system set-up and break it down to few simple linear relationship. 
+
+
+### Kitten object creation
+To create Kitten Object, it need to know the orientation in the beginning
 ```ruby
-	override func viewDidLoad(){
-		super.viewDidLoad()
-		//create is only valid init function in Kitten, and to define the direction of your layour
-		//create return KittenParent which limited the method you can use
-		Kitten.create(.vertical)
-		//from method accept empty/View/ScrollView/UIViewController *bind to topLayoutGuide and bottomLayoutGuide
-		//from method return KittenParentMethods to define some default value or switch mode
-		.from(someView)
-		//padding with its parent, for vertical, it's top , for horizontal, it's left
-		//for vertical, your first view is top + 10 in position
-		.startPadding(10)
-		//a perpendicular padding of each item, for vertical, it's left, for horizontal, it's top
-		.itemDefaultSideStartPadding(10)
-		//add a textView to Kitten, note that textView is not yet added to its parent here, all constraint is setup when build() / rebuild() method call
-		.add(textView)
-		//textView align start of perpendicular direction.
-		//for vertical, it's align left
-		//there are start, center, end, parent for usage
-		.align(.start)
-		.add(anotherTextView)
-		//the offset with previous item, itemOffset is not affected layout if child is first item of childs
-		.itemOffset(10)
-		//build method will auto generate all constraint relationship between those items, and return the container of childs, if no parent in from() method, it will generate a new one
-		.build()
+	//Kitten's method always return Protocol, but you can always force cast to Kitten itself
+	Kitten.horizontal()
+	Kitten.vertical()
+```
 
-		//you can always redefine return object as Kitten class to do what
-		let kitten = Kitten.create(.horizontal) as! Kitten
+### define Parent View
+You may want to add views to a existing view. or Just create a new one.
+Kitten support ScrollView, View, UIViewController and dyanmic create a new one.
+for UIViewController, it default align topLayoutGuide  and bottomLayoutGuide
+```ruby
+	//all return KittenParentMethods protocol
+	Kitten.vertical().from()
+	Kitten.vertical().from(scrollView)
+	Kitten.vertical().from(viewController)
+	Kitten.vertical().from(view)
+```
 
-	}
+### setup Parent View
+You can now setup basic setting after from() method. KittenParentMethods protocol provides some method for you layout basic setup.
+```ruby
+	//.center, .start, .end, .parent
+	defaultAlignment(enum)//a perpendicular alignment of child views
+	startPadding(int)//offset with first item and parent
+	endPadding(int)//offset with last item and parent
+	itemDefaultOffset(int) //offset between item
+	itemDefaultSideStartPadding(int)//perpendicular offset, always top or left
+	itemDefaultSideEndPadding(int) //perpendicualr offset, always bottom or right
+	itemDefaultSidePadding(int)
+	allPadding(int)//all four direction padding, except item-to-item
+	isAlignDirectionEnd(bool) //determine if last child align parent's end. Like match_parent in LinearLayout
+	weightMode(bool) // change to weightMode, child's size based on the weight related to parent, usually use with isAlignDirectionEnd(true)
+```
+### add you first child view
+you can always add a view to Kitten or find existing view with KittenChild protocol.
+```ruby
+	add(UIView)//add a child to Kitten, following KittenChildMethods is updating this child view 
+	with(UIView)//find existing child, and update it in following method call
+	addChilds(UIView ...)
+	addChilds([UIView])
+```
+
+### setup your child view
+after add your child, you may need to provide some information about this view
+```ruby
+	itemOffset(int)//a offset to previous item, for first child, it will not be active
+	sideStartPadding(int)//a perpendicular padding of item, left or top
+	sideEndPadding(int)//right or bottom
+	sidePadding(int)
+	width(int)//set the width of view
+	height(int)//set the height of view
+	size(int)//set the size of view
+	alignSideStart()//align the parent start, top / left
+	alignSideEnd()//align parent end, bottom / right
+	alignSideCenter()//align center of parent, depend on orientation
+	alignSideParent()//child align parent's width / height
+	fillParent()//a child try to fit the size to parent as possible
+	importanceHigh()//the importance of child, higher importance, it will not be compress if other view is big to fillup the parent orientation
+	importanceMedium()
+	importanceLow()
+	weight(float)//active in weightMode(true) only, it determine the weight of item, default is 1.
+```
+
+### Build the constraint after setup
+You must build the constraint after adding all children into Kitten class
+```ruby
+build() //will not remove subview / its constraint relation
+rebuild() // remove subviews before build()
 ```
 
 ## Requirements
