@@ -21,12 +21,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
-        testingBugs(virtualView: self.view)
-//        kitten = Kitten.create(.vertical).from(self)
-//            .isAlignDirectionEnd(true)
-//            .add(sv) as? Kitten
-//            
-//            kitten?.rebuild()
+        
+        kitten = Kitten.create(.vertical).from(self)
+            .isAlignDirectionEnd(true)
+            .add(sv) as? Kitten
+        
+//        testingBugs(virtualView: self.view)
+            kitten?.rebuild()
         
         
         let ivA = UIImageView()
@@ -48,10 +49,11 @@ class ViewController: UIViewController {
             .build()
         cub.backgroundColor = UIColor.black
         
-        Kitten.create(KittenOrientation.vertical)
+        Kitten.vertical()
             .from(sv).isAlignDirectionEnd(false)
             .add(cub).align(.start)
-            .add(itemVerticals()).height(300, .equal)
+            .add(fillParentExample()).alignSideCenter()
+            .add(itemVerticals()).height(300)
             .add(priorityExample())
             .add(alignLeftItems())
             .add(anotherExample())
@@ -59,16 +61,9 @@ class ViewController: UIViewController {
             .add(alignParentCard())
             .add(buttonAlignRightCase())
             .build();
-//
-//        sv.attachContentView(contentView: mainView, scrollOrientation: .vertical)
-        
-        
     }
     
     func testingBugs(virtualView : UIView){
-        let v1 = UIView()
-        let v2 = UIView()
-        let v3 = UIView()
         let lblA = UILabel()
         let lblB = UILabel()
         let lblC = UILabel()
@@ -78,25 +73,26 @@ class ViewController: UIViewController {
         lblB.text = "!! gberi beribv ierbviernv ioernviorv ioerniovnerioreio nrv ierbiuehiuvb euieurv ueve h"
         lblC.text = "World"
         lblD.text = "testing"
+
+        let v1 = Kitten.create(.horizontal).from().defaultAlignment(.start)
+            .allPadding(10)
+            .add(lblA).build()
+        let v2 = Kitten.create(.vertical).from().endPadding(20)
+            .add(lblB).align(.start).sideEndPadding(150)
+            .add(lblD)
+            .build()
+        let v3 = Kitten.create(.vertical).from()
+            .allPadding(10)
+            .add(lblC).build()
         
         v1.backgroundColor = UIColor.red
         v2.backgroundColor = UIColor.green
         v3.backgroundColor = UIColor.blue
-
-        Kitten.create(.vertical).from(v1).defaultAlignment(.start)
-            .allPadding(10)
-            .add(lblA).build()
-        Kitten.create(.vertical).from(v2)
-            .add(lblB).add(lblD)
-            .build()
-        Kitten.create(.vertical).from(v3)
-            .allPadding(10)
-            .add(lblC).build()
         
-        Kitten.create(.vertical).from(virtualView)
+        Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true).startPadding(50).endPadding(100)
             .add(v1)//.height(100, .max)
-            .add(v2).fillParent()
-            .add(v3)
+            .add(v2)//.fillParent()
+            .add(v3).fillParent()
             .build()
     }
     
@@ -237,6 +233,23 @@ class ViewController: UIViewController {
 //        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
 //        self.present(nv, animated: true, completion: nil)
         kitten?.rebuild()
+    }
+    
+    func fillParentExample() -> UIView{
+        let lblA = UILabel()
+        let lblB = UILabel()
+        let lblC = UILabel()
+        lblA.text = "viewA";
+        lblB.text = "viewB svsdnlvsdlkvlkvnklvnewlk nkernreklnvelrn lrenlre nlrenler lk ";
+        lblC.text = "viewC";
+        lblA.backgroundColor = UIColor.red
+        lblB.backgroundColor = UIColor.green
+        lblC.backgroundColor = UIColor.blue
+        return Kitten.create(.horizontal).from()//.isAlignDirectionEnd(true)
+        .add(lblA)
+        .add(lblB).fillParent()
+        .add(lblC).importanceHigh()
+        .build()
     }
 
     override func didReceiveMemoryWarning() {

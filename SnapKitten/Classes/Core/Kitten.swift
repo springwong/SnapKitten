@@ -53,12 +53,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     }
     @discardableResult public func from(_ parent : UIScrollView) -> KittenParentMethods{
         self.parent = parent
-//        self.parent = UIView()
-//        parent.attachContentView(contentView : self.parent!, scrollOrientation : self.orientation)
-//        self.parentTop = self.parent?.snp.top
-//        self.parentBottom = self.parent?.snp.bottom
-//        self.parentLeft = self.parent?.snp.left
-//        self.parentRight = self.parent?.snp.right
         return self
     }
     @discardableResult public func from(_ parent : UIView) -> KittenParentMethods{
@@ -70,13 +64,6 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         return self
     }
     @discardableResult public func from() -> KittenParentMethods{
-//        self.parent = UIView()
-//        if let parent = self.parent{
-//            self.parentTop = parent.snp.top
-//            self.parentBottom = parent.snp.bottom
-//            self.parentLeft = parent.snp.left
-//            self.parentRight = parent.snp.right
-//        }
         return self
     }
     @discardableResult public func parentTop(_ top : ConstraintItem) -> KittenParentMethods{
@@ -295,25 +282,22 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         if let container = container {
             for subview in (container.subviews){
                 if(!NSStringFromClass(type(of: subview)).contains("_UILayoutGuide")){
-                    subview.removeFromSuperview()
                     subview.snp.removeConstraints()
+                    container.invalidateIntrinsicContentSize()
+                    subview.removeFromSuperview()
                 }
             }
         }
-//        if let parent = parent {
-//            for subview in (parent?.subviews)!{
-//                if(!NSStringFromClass(type(of: subview)).contains("_UILayoutGuide")){
-//                    subview.removeFromSuperview()
-//                    subview.snp.removeConstraints()
-//                }
-//            }
-//        }
-        
         return build()
     }
     private func mixBuild() -> UIView{
-        let view = UIView()
+        var view : UIView?
         if container == nil {
+            if let _ = parent as? UIScrollView {
+                view = UIView()
+            }else{
+                view = IntrinicUIView()
+            }
             container = view
             parentTop = container?.snp.top
             parentBottom = container?.snp.bottom
@@ -403,11 +387,13 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     private func updateCompressionResistance(_ axis : UILayoutConstraintAxis, _ child : KittenItem){
         switch child.priority {
         case .low:
-            child.view.setContentCompressionResistancePriority(1, for: axis)
+            child.view.setContentCompressionResistancePriority(100, for: axis)
         case .medium:
-            child.view.setContentCompressionResistancePriority(200, for: axis)
+            //notes : 250 and 251 is a special point which will make behaviour greate different
+            //250 make item totally compressed if three item align together without no align parent in its higher Kitten level
+            child.view.setContentCompressionResistancePriority(500, for: axis)
         case .high:
-            child.view.setContentCompressionResistancePriority(1000, for: axis)
+            child.view.setContentCompressionResistancePriority(900, for: axis)
         }
     }
     private func updateAlignment(_ start : ConstraintMakerExtendable, _ end : ConstraintMakerExtendable, _ center : ConstraintMakerExtendable, _ child : KittenItem){
