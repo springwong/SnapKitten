@@ -19,7 +19,7 @@ import SnapKitten
 import PlaygroundSupport
 
 let virtualView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
-virtualView.backgroundColor = UIColor.white
+virtualView.backgroundColor = UIColor.gray
 PlaygroundPage.current.liveView = virtualView
 
 let iv = UIImageView()
