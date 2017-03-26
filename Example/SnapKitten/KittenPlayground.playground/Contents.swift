@@ -32,7 +32,9 @@ let threeComponentExample = Kitten.horizontal()
 .from().isAlignDirectionEnd(true).defaultAlignment(.center)
 .add(iv2).size(40)
 .add(lbl2).fillParent()
-.add(iv3).size(60)
+.add(iv3).size(60).condition({ () -> Bool in
+    return false
+})
 .build()
 threeComponentExample.backgroundColor = UIColor.orange
 

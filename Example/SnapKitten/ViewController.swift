@@ -232,6 +232,7 @@ class ViewController: UIViewController {
     func btnOnClick(){
 //        let nv = UINavigationController(rootViewController: AlignBottomButtonExampleViewController())
 //        self.present(nv, animated: true, completion: nil)
+        textViewA.text = ("Hello ew nwevwevj envkwekj vwekjbvewjkbv wjekbvweb jwbekbvjwekb wkebvwke bkwb wke")
         kitten?.rebuild()
     }
     

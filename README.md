@@ -120,10 +120,37 @@ after add your child, you may need to provide some information about this view
 
 ### Build the constraint after setup
 You must build the constraint after adding all children into Kitten class
+build() and rebuild() return the parent UIView which contain children
 ```ruby
 build() //will not remove subview / its constraint relation
 rebuild() // remove subviews before build()
 ```
+
+### Advance Usage
+
+### Kitten Object as variable
+Kitten methods always return "Protocol" but you can always force cast to Kitten object
+```ruby
+	let kitten : Kitten = Kitten.horizonta() as! Kitten
+	let kitten : Kitten = Kitten.horizonta().from() as! Kitten
+	let kitten : Kitten = Kitten.horizonta().from().add(lblA) as! Kitten
+```
+
+#### condition insert child
+As kitten is a linear relationship, children do not have actual relation to specific item
+Kitten provides a condition method to allow the control of child insertion
+```ruby
+	let threeComponentExample = Kitten.horizontal()
+.from().isAlignDirectionEnd(true).defaultAlignment(.center)
+.add(iv2).size(40)
+.add(lbl2).fillParent()
+.add(iv3).size(60).condition({ () -> Bool in
+	// you can determine the condition by any variable in your class
+    return false
+})
+.rebuild()
+```
+![](website/static/conditionSample.png)
 
 ## Requirements
 - iOS 8.0+
