@@ -10,7 +10,7 @@ SnapKitten is a Linear Layout Solution Library based on SnapKit and Auto Layout.
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-#Usage
+## Usage
 
 ```ruby
 import UIKit
