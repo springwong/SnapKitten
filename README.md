@@ -14,21 +14,31 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 #Usage
 
 ```ruby
+import UIKit
 import SnapKitten
+import PlaygroundSupport
 
-class ViewController: UIViewController {
-    lazy var textViewA = UILabel()
-    lazy var textViewB = UILabel()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //Some visual update on textView
-        updateUI()
-        _ = Kitten.create(.vertical).from(self)
-            .add(textViewA)
-            .add(textViewB)
-            .build()
-    }
+let virtualView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+virtualView.backgroundColor = UIColor.white
+PlaygroundPage.current.liveView = virtualView
+
+let iv = UIImageView()
+iv.backgroundColor = UIColor.red
+let lblA = UILabel()
+lblA.text = "Hello World"
+
+let simpleComponent = Kitten.horizontal().from()
+.add(iv).size(40)
+.add(lblA)
+.build()
+simpleComponent.backgroundColor = UIColor.green
+
+Kitten.create(.vertical).from(virtualView)
+    .add(simpleComponent).align(.start)
+    .build()
 ```
+Result:
+![](website/static/simpleComponent.png)
 
 ### How do use Kitten class?
 

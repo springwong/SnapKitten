@@ -4,38 +4,21 @@ import UIKit
 import SnapKitten
 import PlaygroundSupport
 
-//var str = "Hello, playground"
-
-
-
-let virtualView = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 736))
+let virtualView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
 virtualView.backgroundColor = UIColor.white
-
-//uncomment this code if layout to not display
-//PlaygroundPage.current.needsIndefiniteExecution = true
 PlaygroundPage.current.liveView = virtualView
 
-let v1 = UIView()
-let v2 = UIView()
-let v3 = UIView()
+let iv = UIImageView()
+iv.backgroundColor = UIColor.red
 let lblA = UILabel()
-let lblB = UILabel()
-let lblC = UILabel()
-lblB.numberOfLines = 0
-lblA.text = "Hello"
-lblB.text = "!! gberi beribv ierbviernv ioernviorv ioerniovnerioreio nrv ierbiuehiuvb euieurv ueve h"
-lblC.text = "World"
+lblA.text = "Hello World"
 
-v1.backgroundColor = UIColor.red
-v2.backgroundColor = UIColor.green
-v3.backgroundColor = UIColor.blue
+let simpleComponent = Kitten.horizontal().from()
+.add(iv).size(40)
+.add(lblA)
+.build()
+simpleComponent.backgroundColor = UIColor.green
 
-Kitten.create(.vertical).from(virtualView).isAlignDirectionEnd(true)
-    .add(v1)
-    .add(v2)
-    .add(v3).fillParent()
+Kitten.create(.vertical).from(virtualView)
+    .add(simpleComponent).align(.start)
     .build()
-
-Kitten.create(.horizontal).from(v1).defaultAlignment(.start).allPadding(10).add(lblA).build()
-Kitten.create(.horizontal).from(v2).add(lblB).build()
-Kitten.create(.horizontal).from(v3).allPadding(10).add(lblC).build()
