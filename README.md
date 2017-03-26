@@ -22,19 +22,24 @@ let virtualView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
 virtualView.backgroundColor = UIColor.gray
 PlaygroundPage.current.liveView = virtualView
 
-let iv = UIImageView()
-iv.backgroundColor = UIColor.red
-let lblA = UILabel()
-lblA.text = "Hello World"
+//some init UI Coding
 
 let simpleComponent = Kitten.horizontal().from()
 .add(iv).size(40)
-.add(lblA)
+.add(lblA).itemOffset(10)
 .build()
 simpleComponent.backgroundColor = UIColor.green
 
+let threeComponentExample = Kitten.horizontal()
+.from().isAlignDirectionEnd(true).defaultAlignment(.center)
+.add(iv2).size(40)
+.add(lbl2).fillParent()
+.add(iv3).size(60)
+.build()
+
 Kitten.create(.vertical).from(virtualView)
     .add(simpleComponent).align(.start)
+    .add(threeComponentExample)
     .build()
 ```
 Result:
