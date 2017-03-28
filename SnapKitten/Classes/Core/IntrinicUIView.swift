@@ -18,6 +18,9 @@ open class IntrinicUIView: UIView {
             //get the original value of contentSize
             var contentHeight = subview.intrinsicContentSize.height
             var contentWidth = subview.intrinsicContentSize.width
+            
+//            print("contentHeight \(contentHeight)")
+//            print("contentWidth \(contentWidth)")
             //loop subview constraint
             for constraint : NSLayoutConstraint in subview.constraints {
                 //                    print(constraint.firstAttribute.rawValue)
@@ -62,6 +65,10 @@ open class IntrinicUIView: UIView {
                 maxHeight = height
             }
             
+        }
+//        print("CGSize(width: maxWidth, height: maxHeight) \( CGSize(width: maxWidth, height: maxHeight))")
+        if(superview != nil){
+            superview?.invalidateIntrinsicContentSize()
         }
         return CGSize(width: maxWidth, height: maxHeight)
     }

@@ -51,6 +51,7 @@ class ViewController: UIViewController {
         
         Kitten.vertical()
             .from(sv).isAlignDirectionEnd(false)
+            .add(example())
             .add(cub).align(.start)
             .add(fillParentExample()).alignSideCenter()
             .add(itemVerticals()).height(300)
@@ -251,6 +252,25 @@ class ViewController: UIViewController {
         .add(lblB).fillParent()
         .add(lblC).importanceHigh()
         .build()
+    }
+    
+    func example() -> UIView {
+        let lblA = UILabel()
+        let lblB = UILabel()
+        let lblC = UILabel()
+        lblA.text = "viewA";
+        lblB.text = "viewB svsdnlvsdlkvlkvnklvnewlk nkernreklnvelrn lrenlre nlrenler lk ";
+        lblC.text = "viewC";
+        lblA.backgroundColor = UIColor.blue
+        let view = Kitten.vertical().from().startPadding(10).endPadding(50).itemDefaultOffset(20)
+            .add(lblA)
+            .add(lblB)
+            .add(lblC)
+            .build()
+        view.backgroundColor = UIColor.gray
+//        return view
+        return Kitten.vertical().from()
+            .add(view).build()
     }
 
     override func didReceiveMemoryWarning() {
