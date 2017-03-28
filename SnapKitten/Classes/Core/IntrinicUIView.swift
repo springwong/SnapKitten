@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class IntrinicUIView: UIView {
+open class IntrinicUIView: UIView {
 
-    override public var intrinsicContentSize: CGSize {
+    override open var intrinsicContentSize: CGSize {
         var maxWidth :CGFloat = self.frame.size.width
         var maxHeight :CGFloat = self.frame.size.height
         
@@ -65,7 +65,7 @@ public class IntrinicUIView: UIView {
         }
         return CGSize(width: maxWidth, height: maxHeight)
     }
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         invalidateIntrinsicContentSize()
     }
