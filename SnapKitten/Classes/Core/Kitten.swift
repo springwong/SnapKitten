@@ -149,6 +149,22 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         }
         return self
     }
+    
+    @discardableResult public func removeChild(_ child : UIView) -> KittenChild {
+        var index = 0
+        for item in childs {
+            if child.isEqual(item.view) {
+                self.childs.remove(at: index)
+                break
+            }
+            index += 1
+        }
+        return self
+    }
+    @discardableResult public func removeAllChild() -> KittenChild {
+        childs.removeAll()
+        return self
+    }
     @discardableResult public func with(_ child: UIView) -> KittenChildMethods {
         for item in childs{
             if child.isEqual(item.view){
@@ -264,6 +280,18 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         self.currentChild?.weight = value
         return self
     }
+    @discardableResult public func sideCompressionResistanceHigh() -> KittenChildMethods {
+        self.currentChild?.sideCompressionResistance = 1000
+        return self
+    }
+    @discardableResult public func sideCompressionResistanceMedium() -> KittenChildMethods {
+        self.currentChild?.sideCompressionResistance = 750
+        return self
+    }
+    @discardableResult public func sideCompressionResistanceLow() -> KittenChildMethods {
+        self.currentChild?.sideCompressionResistance = 250
+        return self
+    }
     internal func preBuild() -> [KittenItem]{
         return childs.filter({ (item) -> Bool in
             if let condition = item.insertCondition{
@@ -356,6 +384,8 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                 }else{
                     child.view.setContentHuggingPriority(1000, for: orientation == .vertical ? .vertical : .horizontal)
                 }
+                
+                child.view.setContentCompressionResistancePriority(UILayoutPriority(child.sideCompressionResistance), for: orientation == .vertical ? .horizontal : .vertical)
                 
                 //todo : rethink if this feature appropriate
 //                if let ratio = child.ratio{

@@ -53,43 +53,43 @@ class ViewController: UIViewController {
             .build()
         cub.backgroundColor = UIColor.black
         
-        let testImageView = UIImageView()
-        sv.addSubview(testImageView)
-        
-        let bug = bugExample()
-        sv.addSubview(bug)
-        
-        let btnContinue = UIButton()
-        sv.addSubview(btnContinue)
-        
-        testImageView.snp.makeConstraints { (make) in
-            make.top.left.right.equalToSuperview()
-            make.bottom.equalTo(bug.snp.top)
-            make.height.equalTo(22)
-        }
-        bug.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.bottom.equalTo(btnContinue.snp.top)
-        }
-        btnContinue.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(44)
-        }
+//        let testImageView = UIImageView()
+//        sv.addSubview(testImageView)
+//        
+//        let bug = bugExample()
+//        sv.addSubview(bug)
+//        
+//        let btnContinue = UIButton()
+//        sv.addSubview(btnContinue)
+//        
+//        testImageView.snp.makeConstraints { (make) in
+//            make.top.left.right.equalToSuperview()
+//            make.bottom.equalTo(bug.snp.top)
+//            make.height.equalTo(22)
+//        }
+//        bug.snp.makeConstraints { (make) in
+//            make.left.right.equalToSuperview()
+//            make.bottom.equalTo(btnContinue.snp.top)
+//        }
+//        btnContinue.snp.makeConstraints { (make) in
+//            make.left.right.bottom.equalToSuperview()
+//            make.height.equalTo(44)
+//        }
         
         Kitten.vertical()
             .from(sv).isAlignDirectionEnd(false)
-            .add(bugExample())
-//            .add(example())
-//            .add(cub).align(.start)
-//            .add(fillParentExample()).alignSideCenter()
-//            .add(itemVerticals()).height(300)
-//            .add(priorityExample())
-//            .add(alignLeftItems())
-//            .add(anotherExample())
-//            .addChilds(textViewA, textViewB)
-//            .add(alignParentCard())
-//            .add(buttonAlignRightCase())
-//            .build();
+//            .add(bugExample())
+            .add(example())
+            .add(cub).align(.start)
+            .add(fillParentExample()).alignSideCenter()
+            .add(itemVerticals()).height(300)
+            .add(priorityExample())
+            .add(alignLeftItems())
+            .add(anotherExample())
+            .addChilds(textViewA, textViewB)
+            .add(alignParentCard())
+            .add(buttonAlignRightCase())
+            .build();
     }
     
     func testingBugs(virtualView : UIView){

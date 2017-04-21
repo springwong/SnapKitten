@@ -16,4 +16,6 @@ public protocol KittenChild : KittenBuild{
     //add a list of child to Kitten, current object point to last object of the list
     @discardableResult func addChilds(_ childs : UIView ...) -> KittenChildMethods
     @discardableResult func addChilds(_ childs : [UIView]) -> KittenChildMethods
+    @discardableResult func removeChild(_ child : UIView) -> KittenChild
+    @discardableResult func removeAllChild() -> KittenChild
 }

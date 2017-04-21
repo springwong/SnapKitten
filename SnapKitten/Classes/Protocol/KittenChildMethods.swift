@@ -45,4 +45,8 @@ public protocol KittenChildMethods : KittenChild, KittenBuild{
     @discardableResult func importanceLow() -> KittenChildMethods
     //used only in weight mode, child separate screen with it's weight, all childs weight 0 is not allowed in ios side
     @discardableResult func weight(_ value : Float) -> KittenChildMethods
+    
+    @discardableResult func sideCompressionResistanceHigh() -> KittenChildMethods
+    @discardableResult func sideCompressionResistanceMedium() -> KittenChildMethods
+    @discardableResult func sideCompressionResistanceLow() -> KittenChildMethods
 }

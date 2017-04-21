@@ -24,6 +24,8 @@ internal final class KittenItem {
     var isFillParent : Bool = false
     var alignment : KittenAlignment
     var insertCondition : KittenInsertCondition?
+    
+    var sideCompressionResistance : Int = 750
 
     init(child : UIView, alignment : KittenAlignment){
         self.view = child
