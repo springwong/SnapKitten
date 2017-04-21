@@ -296,7 +296,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
             if let _ = parent as? UIScrollView {
                 view = UIView()
             }else{
-                view = IntrinicUIView()
+                view = IntrinsicUIView()
             }
             container = view
             parentTop = container?.snp.top

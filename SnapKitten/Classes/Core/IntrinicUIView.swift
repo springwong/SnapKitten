@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class IntrinicUIView: UIView {
+open class IntrinsicUIView: UIView {
 
     override open var intrinsicContentSize: CGSize {
         var maxWidth :CGFloat = self.frame.size.width

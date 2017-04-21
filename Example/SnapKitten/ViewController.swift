@@ -22,10 +22,14 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         updateUI()
         
-        kitten = Kitten.create(.vertical).from(self)
-            .isAlignDirectionEnd(true)
-            .add(sv) as? Kitten
+//        kitten = Kitten.create(.vertical).from(self)
+//            .isAlignDirectionEnd(true)
+//            .add(sv) as? Kitten
         
+        self.view.addSubview(sv)
+        sv.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
 //        testingBugs(virtualView: self.view)
             kitten?.rebuild()
         
@@ -49,19 +53,43 @@ class ViewController: UIViewController {
             .build()
         cub.backgroundColor = UIColor.black
         
+        let testImageView = UIImageView()
+        sv.addSubview(testImageView)
+        
+        let bug = bugExample()
+        sv.addSubview(bug)
+        
+        let btnContinue = UIButton()
+        sv.addSubview(btnContinue)
+        
+        testImageView.snp.makeConstraints { (make) in
+            make.top.left.right.equalToSuperview()
+            make.bottom.equalTo(bug.snp.top)
+            make.height.equalTo(22)
+        }
+        bug.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(btnContinue.snp.top)
+        }
+        btnContinue.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(44)
+        }
+        
         Kitten.vertical()
             .from(sv).isAlignDirectionEnd(false)
-            .add(example())
-            .add(cub).align(.start)
-            .add(fillParentExample()).alignSideCenter()
-            .add(itemVerticals()).height(300)
-            .add(priorityExample())
-            .add(alignLeftItems())
-            .add(anotherExample())
-            .addChilds(textViewA, textViewB)
-            .add(alignParentCard())
-            .add(buttonAlignRightCase())
-            .build();
+            .add(bugExample())
+//            .add(example())
+//            .add(cub).align(.start)
+//            .add(fillParentExample()).alignSideCenter()
+//            .add(itemVerticals()).height(300)
+//            .add(priorityExample())
+//            .add(alignLeftItems())
+//            .add(anotherExample())
+//            .addChilds(textViewA, textViewB)
+//            .add(alignParentCard())
+//            .add(buttonAlignRightCase())
+//            .build();
     }
     
     func testingBugs(virtualView : UIView){
@@ -271,6 +299,55 @@ class ViewController: UIViewController {
 //        return view
         return Kitten.vertical().from()
             .add(view).build()
+    }
+    
+    func bugExample() -> UIView {
+        let lblTitle = UILabel()
+        let lblName = UILabel()
+        let tfContactPerson = UITextField()
+        let lblPhone = UILabel()
+        let tfTel = UITextField()
+        let lblAddress = UILabel()
+        let tfFlat = UITextField()
+        let tfBlock = UITextField()
+        let tfStreet = UITextField()
+        let tfFloor = UITextField()
+        let tfBuilding = UITextField()
+        let sbDistrict = UIButton()
+        let sbCity = UIButton()
+        lblTitle.text = "sdivh idsh is"
+        lblName.text = "sfsd "
+        tfContactPerson.placeholder = "sd s"
+        lblPhone.text = "sdfdsf"
+        lblAddress.text = "sdfdsf"
+        tfTel.placeholder = "sd s"
+        tfFlat.placeholder = "sd s"
+        tfBlock.placeholder = "sd s"
+        tfStreet.placeholder = "sd s"
+        tfFloor.placeholder = "sd s"
+        tfBuilding.placeholder = "sd s"
+        sbDistrict.setTitle("sg owejoew", for: .normal)
+        sbCity.setTitle("sdf s", for: .normal)
+        let kitten = Kitten.create(.vertical).from(UIView()).itemDefaultOffset(10)
+        return kitten
+            .add(lblTitle)
+            .add(
+                Kitten.create(.vertical).from().itemDefaultOffset(10)
+                    .add(lblName).itemOffset(15)
+                    .add(tfContactPerson)
+                    .add(lblPhone).itemOffset(15)
+                    .add(tfTel)
+                    .add(lblAddress).itemOffset(15)
+                    .add(tfFlat)
+                    .add(tfFloor)
+                    .add(tfBlock)
+                    .add(tfStreet)
+                    .add(tfBuilding)
+                    .add(sbDistrict)
+                    .add(sbCity)
+                    .build()
+            )
+            .build()
     }
 
     override func didReceiveMemoryWarning() {
