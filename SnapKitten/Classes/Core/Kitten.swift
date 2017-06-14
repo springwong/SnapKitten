@@ -355,7 +355,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                     , child)
                 if isWeightMode{
                     if insertItems.first?.view == child.view{
-                        start.equalToSuperview().offset(startPadding)
+                        start.equalTo(parentStart!).offset(startPadding)
                     }else{
                         start.equalTo(lastEnd!).offset(child.itemOffset)
                         orientationLength.equalTo((insertItems.first?.view)!).multipliedBy(child.weight / totalWeight!)
