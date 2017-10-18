@@ -39,5 +39,5 @@ A library based on SnapKit and Constraint system. It try to simplify the linear 
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'SnapKit', '~> 3.2.0'
+  s.dependency 'SnapKit', '~> 4.0.0'
 end
