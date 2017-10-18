@@ -380,12 +380,12 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
                 }
                 KittenCommonMethod.updateSize(perpendicularLength, perpendicularChildSize)
                 if child.isFillParent{
-                    child.view.setContentHuggingPriority(250, for: orientation == .vertical ? .vertical : .horizontal)
+                    child.view.setContentHuggingPriority(UILayoutPriority(rawValue: 250), for: orientation == .vertical ? .vertical : .horizontal)
                 }else{
-                    child.view.setContentHuggingPriority(1000, for: orientation == .vertical ? .vertical : .horizontal)
+                    child.view.setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: orientation == .vertical ? .vertical : .horizontal)
                 }
                 
-                child.view.setContentCompressionResistancePriority(UILayoutPriority(child.sideCompressionResistance), for: orientation == .vertical ? .horizontal : .vertical)
+                child.view.setContentCompressionResistancePriority(UILayoutPriority(Float(child.sideCompressionResistance)), for: orientation == .vertical ? .horizontal : .vertical)
                 
                 //todo : rethink if this feature appropriate
 //                if let ratio = child.ratio{
@@ -417,13 +417,13 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
     private func updateCompressionResistance(_ axis : UILayoutConstraintAxis, _ child : KittenItem){
         switch child.priority {
         case .low:
-            child.view.setContentCompressionResistancePriority(100, for: axis)
+            child.view.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 100), for: axis)
         case .medium:
             //notes : 250 and 251 is a special point which will make behaviour greate different
             //250 make item totally compressed if three item align together without no align parent in its higher Kitten level
-            child.view.setContentCompressionResistancePriority(500, for: axis)
+            child.view.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 500), for: axis)
         case .high:
-            child.view.setContentCompressionResistancePriority(900, for: axis)
+            child.view.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 900), for: axis)
         }
     }
     private func updateAlignment(_ start : ConstraintMakerExtendable, _ end : ConstraintMakerExtendable, _ center : ConstraintMakerExtendable, _ child : KittenItem){

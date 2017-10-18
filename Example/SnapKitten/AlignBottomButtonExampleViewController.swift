@@ -52,7 +52,7 @@ class AlignBottomButtonExampleViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func btnOnClick(){
+    @objc func btnOnClick(){
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
