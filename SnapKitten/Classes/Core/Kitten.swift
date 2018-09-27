@@ -414,7 +414,7 @@ public class Kitten : KittenParent, KittenParentMethods, KittenChildMethods, Kit
         }
         return container!
     }
-    private func updateCompressionResistance(_ axis : UILayoutConstraintAxis, _ child : KittenItem){
+    private func updateCompressionResistance(_ axis : NSLayoutConstraint.Axis, _ child : KittenItem){
         switch child.priority {
         case .low:
             child.view.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 100), for: axis)
