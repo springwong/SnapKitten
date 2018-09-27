@@ -30,7 +30,7 @@ open class IntrinsicUIView: UIView {
                 //equalTo = 0
                 //lessThan = -1
                 //greater = 1
-                if(constraint.firstAttribute == NSLayoutAttribute.width){
+                if(constraint.firstAttribute == NSLayoutConstraint.Attribute.width){
                     if(
                         //check if its lessThan or equalTo, and check the constant value is less than current value
                         (constraint.relation.rawValue <= 0
@@ -44,7 +44,7 @@ open class IntrinsicUIView: UIView {
                     }
                     
                 }
-                if(constraint.firstAttribute == NSLayoutAttribute.height){
+                if(constraint.firstAttribute == NSLayoutConstraint.Attribute.height){
                     if((constraint.relation.rawValue <= 0
                         && constraint.constant < contentHeight)
 //                        ||
