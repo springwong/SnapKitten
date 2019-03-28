@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SnapKitten'
-  s.version          = '1.2.6'
+  s.version          = '1.2.7'
   s.summary          = 'A library based on SnapKit and Constraint system. It try to simplify the linear case of UI Constraint'
 
 # This description is used to generate tags and improve search results.
@@ -28,8 +28,8 @@ A library based on SnapKit and Constraint system. It try to simplify the linear 
   s.author           = { 'Spring Wong' => 'rudolphwong2002@gmail.com' }
   s.source           = { :git => 'https://github.com/springwong/SnapKitten.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-s.pod_target_xcconfig = { "SWIFT_VERSION" => "4.0" }
-s.swift_version = '4.0'
+s.pod_target_xcconfig = { "SWIFT_VERSION" => "5.0" }
+s.swift_version = '5.0'
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'SnapKitten/Classes/**/*'
