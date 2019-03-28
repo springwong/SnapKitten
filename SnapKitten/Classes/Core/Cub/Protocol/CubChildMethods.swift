@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol CubChildMethods : CubChild, CubBuild {
+public protocol CubChildMethods : CubChild {
     @discardableResult func alignParentTop() -> CubChildMethods
     @discardableResult func alignParentBottom() -> CubChildMethods
     @discardableResult func alignParentLeft() -> CubChildMethods

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol CubParentMethods : CubBuild, CubChild{
+public protocol CubParentMethods : CubChild{
     @discardableResult func defaultOffset(_ value : Int) -> CubParentMethods
     
 }

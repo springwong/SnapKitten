@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol KittenChildMethods : KittenChild, KittenBuild{
+public protocol KittenChildMethods : KittenChild{
     //item offset of previous item, first item of list will not use this parameter
     @discardableResult func itemOffset(_ value : Int) -> KittenChildMethods
     //left / top padding

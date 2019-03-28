@@ -9,7 +9,7 @@
 import Foundation
 import SnapKit
 
-public protocol KittenParentMethods : KittenChild, KittenBuild{
+public protocol KittenParentMethods : KittenChild{
     //perpendicular alignment of items, default match parent
     @discardableResult func defaultAlignment(_ alignment : KittenAlignment) -> KittenParentMethods
     //padding to the container start
