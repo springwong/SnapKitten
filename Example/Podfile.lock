@@ -4,7 +4,7 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - SnapKit (4.0.0)
+  - SnapKit (4.0.1)
   - SnapKitten (1.2.6):
     - SnapKit (~> 4.0.0)
 
@@ -12,15 +12,20 @@ DEPENDENCIES:
   - FBSnapshotTestCase
   - SnapKitten (from `../`)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - FBSnapshotTestCase
+    - SnapKit
+
 EXTERNAL SOURCES:
   SnapKitten:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  SnapKitten: 59bcba0a1f6807df9e57a58e4099f480b22e9c16
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  SnapKitten: 9a9e63eea054222641907f23ace69f5b887f320f
 
 PODFILE CHECKSUM: 14028b240a293464f7b6e771317209067b1bc664
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
